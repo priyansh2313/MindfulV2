@@ -1,0 +1,172 @@
+/* 🌟 Background Gradient */
+.container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  }
+  
+  /* 🟦 Glassmorphism Box */
+  .glassContainer {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    animation: fadeIn 0.8s ease-in-out;
+  }
+  
+  /* 🔵 Logo & Header */
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .logo {
+    width: 40px;
+    height: 40px;
+    color: #6366f1;
+  }
+  
+  .title {
+    font-size: 26px;
+    font-weight: bold;
+    color: #6366f1;
+    margin-left: 10px;
+  }
+  
+  /* ✨ Social Buttons */
+  .socialButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .button3d {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+    border: none;
+    width: 100%;
+  }
+  
+  .googleButton {
+    background: #ea4335;
+    color: white;
+  }
+  
+  .facebookButton {
+    background: #1877f2;
+    color: white;
+  }
+  
+  .button3d:hover {
+    transform: scale(1.05);
+  }
+  
+  /* 🔗 Divider Line */
+  .orDivider {
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .orDivider span {
+    background: white;
+    padding: 0 10px;
+  }
+  
+  .orDivider::before,
+  .orDivider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #ccc;
+    margin: 0 10px;
+  }
+  
+  /* 📩 Form Styling */
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #444;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    font-size: 1rem;
+  }
+  
+  /* 🔥 3D Button Effect */
+  .button3d {
+    background: #6366f1;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0px 5px 0px #4f46e5;
+  }
+  
+  .button3d:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 7px 0px #3b35c4;
+  }
+  
+  .button3d:active {
+    transform: translateY(3px);
+    box-shadow: 0px 2px 0px #2a26a1;
+  }
+  
+  /* 📝 Sign-up Text */
+  .signupText {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .signupLink {
+    color: #6366f1;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .signupLink:hover {
+    text-decoration: underline;
+  }
+  
+  /* 🌀 Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  

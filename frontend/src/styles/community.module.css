@@ -1,0 +1,164 @@
+/* 🌟 Background Styling */
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  }
+  
+  /* 📝 Login Screen */
+  .loginScreen {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeIn 0.8s ease-in-out;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #444;
+  }
+  
+  .inputBox {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 2px solid #6366f1;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  
+  .startButton {
+    background: #6366f1;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.2s;
+    margin-top: 10px;
+    box-shadow: 0px 5px 0px #4f46e5;
+  }
+  
+  .startButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 7px 0px #3b35c4;
+  }
+  
+  .startButton:active {
+    transform: translateY(3px);
+    box-shadow: 0px 2px 0px #2a26a1;
+  }
+  
+  /* 🔹 Chat Layout */
+  .chatContainer {
+    display: flex;
+    width: 90%;
+    height: 80vh;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* 🟢 Online Users Sidebar */
+  .sidebar {
+    width: 20%;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    border-right: 2px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .sidebarTitle {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .user {
+    color: #28a745;
+    font-size: 16px;
+    margin: 5px 0;
+  }
+  
+  /* 📩 Chat Box */
+  .chatBox {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  /* 💬 Messages */
+  .messagesContainer {
+    flex: 1;
+    overflow-y: auto;
+  }
+  
+  .message {
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 60%;
+    margin-bottom: 10px;
+    animation: slideIn 0.3s ease-in-out;
+  }
+  
+  .myMessage {
+    background: #6366f1;
+    color: white;
+    align-self: flex-end;
+  }
+  
+  .otherMessage {
+    background: #eee;
+    color: #333;
+  }
+  
+  /* ⌨️ Typing Animation */
+  .typing {
+    font-style: italic;
+    color: #777;
+  }
+  
+  /* 🖊 Message Input */
+  .inputContainer {
+    display: flex;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .inputField {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+  }
+  
+  /* 🚀 Send Button */
+  .sendButton {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+  
+  /* 🌀 Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateY(10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  

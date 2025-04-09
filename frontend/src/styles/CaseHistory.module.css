@@ -1,0 +1,107 @@
+/* 🔹 CaseHistory.module.css - Styled for Glassmorphic UI */
+
+/* 🔷 Background */
+.caseHistoryContainer {
+    background: linear-gradient(135deg, #021b79, #0a74da); /* Deep blue gradient */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    font-family: "Arial", sans-serif;
+  }
+  
+  /* 📝 Title */
+  .title {
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* 📜 Questions Wrapper */
+  .questionsWrapper {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* ❓ Question Block */
+  .questionBlock {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    animation: fadeIn 0.8s ease-in-out;
+  }
+  
+  /* 🎤 Question Text */
+  .question {
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 8px;
+  }
+  
+  /* 📝 Text Input */
+  .textInput {
+    width: 100%;
+    min-height: 60px;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.3);
+    color: #021b79;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+  
+  .textInput:focus {
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.5);
+  }
+  
+  /* 🚀 Submit Button */
+  .submitBtn {
+    width: 100%;
+    max-width: 250px;
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+    font-size: 18px;
+    padding: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    backdrop-filter: blur(20px);
+    margin-top: 30px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  
+  .submitBtn:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.5);
+  }
+  
+  /* 🌟 Fade-in Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  

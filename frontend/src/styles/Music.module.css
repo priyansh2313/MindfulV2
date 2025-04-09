@@ -1,0 +1,137 @@
+/* 🌌 Full-Screen Background */
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  backdrop-filter: blur(10px);
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* 🔙 Back Button */
+.backButton {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.backButton:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 🎧 Music Player Box (Full Screen) */
+.player {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 50px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 85vw;
+  height: 85vh;
+  box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 💡 Neon Glow Effect */
+.glow {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(0, 0, 0, 0) 70%);
+  animation: flicker 2s infinite alternate;
+}
+
+/* 🎵 Album Cover */
+.albumCover {
+  width: 220px;
+  height: 220px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  animation: pulse 3s infinite alternate;
+}
+
+/* 🎼 Song Title */
+.trackTitle {
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.3);
+}
+
+/* 👤 Artist Name */
+.trackArtist {
+  font-size: 20px;
+  color: #aaa;
+  margin-bottom: 30px;
+}
+
+/* 🎛️ Controls */
+.controls {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.controlButton {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  padding: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.controlButton:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(1.1);
+}
+
+/* ✨ Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes flicker {
+  from {
+    opacity: 0.7;
+  }
+  to {
+    opacity: 1;
+  }
+}

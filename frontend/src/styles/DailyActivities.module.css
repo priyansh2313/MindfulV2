@@ -1,0 +1,112 @@
+.container {
+  padding: 3rem;
+  max-width: 1200px;
+  margin: auto;
+  color: #222;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.title {
+  font-size: 2.4rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #3a6351;
+}
+
+.breathingBubble {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 1.5rem auto;
+  background-color: #b2dfdb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.breathingText {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #004d40;
+}
+
+.card {
+  background: #f4f6f7;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.card p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.button {
+  background-color: #3a6351;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  margin-right: 0.8rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  background-color: #2d4c3e;
+}
+
+.start {
+  background-color: #43a047;
+}
+
+.stop {
+  background-color: #e53935;
+}
+
+.active {
+  background-color: #00897b;
+}
+
+.timer {
+  font-weight: bold;
+  margin-top: 0.5rem;
+  color: #555;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: vertical;
+}
+
+.affirmation {
+  font-size: 1.2rem;
+  font-style: italic;
+  margin: 1rem 0;
+  color: #555;
+}
+
+.exerciseSelector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}

@@ -1,0 +1,139 @@
+/* Ensuring styles are only applied to the Questionnaire component */
+.questionnaire_container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #89CFF0, #4A90E2);
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Branding (Top-Left) */
+.questionnaire_branding {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.questionnaire_brainIcon {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.questionnaire_brandText {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 1px;
+}
+
+/* Main Questionnaire Box */
+.questionnaire_box {
+  background: white;
+  width: 90%;
+  max-width: 600px;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.questionnaire_box h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Each Question */
+.questionnaire_block {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(0, 0, 255, 0.05);
+  border-radius: 8px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.questionnaire_block:hover {
+  transform: scale(1.02);
+}
+
+.questionnaire_question {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+/* Dropdown (Options) */
+.questionnaire_dropdown {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  cursor: pointer;
+}
+
+/* Submit Button */
+.questionnaire_submitBtn, .questionnaire_sendBtn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.questionnaire_submitBtn {
+  background: #007BFF;
+  color: white;
+  border: none;
+}
+
+.questionnaire_submitBtn:hover {
+  background: #0056b3;
+}
+
+/* Email Input */
+.questionnaire_emailInput {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+}
+
+/* Send Report Button */
+.questionnaire_sendBtn {
+  background: #28A745;
+  color: white;
+  border: none;
+}
+
+.questionnaire_sendBtn:hover {
+  background: #1e7e34;
+}
+
+/* Success Message */
+.questionnaire_successMessage {
+  text-align: center;
+  color: #28A745;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

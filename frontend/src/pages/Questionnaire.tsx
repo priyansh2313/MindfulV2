@@ -38,7 +38,7 @@ const Questionnaire = () => {
 
     try {
       await emailjs.send(
-        "service_pe30eko",
+        "service_6dchref",
         "template_h7uqq2m",
         {
           email,

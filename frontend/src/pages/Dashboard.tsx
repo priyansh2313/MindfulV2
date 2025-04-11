@@ -106,6 +106,7 @@ const Dashboard = () => {
           <DashboardCard title="Mindful Assistant" description="Get AI support" icon={<MessageSquareHeart className={styles.cardIcon} />} onClick={() => navigate("/assistant")} />
           <DashboardCard title="Encyclopedia" description="Learn about mental health" icon={<MessageSquareHeart className={styles.cardIcon} />} onClick={() => navigate("/encyclopedia")} />
           <DashboardCard title="Daily Activities" description="Mindfulness exercises" icon={<MessageSquareHeart className={styles.cardIcon} />} onClick={() => navigate("/daily-activities")} />
+          <DashboardCard title="Image Analyzer" description="Analyze your images" icon={<MessageSquareHeart className={styles.cardIcon} />} onClick={() => navigate("/image-analyzer")} />  
         </div>
       </div>
 

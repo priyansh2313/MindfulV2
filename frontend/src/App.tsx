@@ -7,6 +7,7 @@ import DailyActivities from "./pages/DailyActivities";
 import Dashboard from './pages/Dashboard';
 import Encyclopedia from "./pages/Encyclopedia";
 import Evaluation from './pages/Evaluation';
+import ImageAnalyzer from './pages/ImageAnalyser';
 import Introduction from './pages/Introduction';
 import Journal from './pages/Journal';
 import Login from './pages/Login';
@@ -28,6 +29,7 @@ function App() {
         <Route path="/journal" element={<Journal />} />
         <Route path="/community" element={<Community />} />
         <Route path="/music" element={<Music />} />
+        <Route path="/image-analyzer" element={<ImageAnalyzer />} />
         <Route path="/assistant" element={<MindfulAssistant />} />
         <Route path="/encyclopedia" element={<Encyclopedia />} />  
         <Route path="/daily-activities" element={<DailyActivities />} /> 

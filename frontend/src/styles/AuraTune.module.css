@@ -1,0 +1,106 @@
+/* AuraTune.module.css */
+
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #000428, #004e92);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  animation: fadeIn 1s ease-in;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  animation: slideIn 1s ease-in-out;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.upload {
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.image {
+  max-width: 70vw;
+  max-height: 60vh;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.image:hover {
+  transform: scale(1.02);
+}
+
+.loading {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #ffd700;
+}
+
+.colors {
+  display: flex;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.colorSwatch {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px #000;
+}
+
+.mood {
+  margin-top: 1.2rem;
+  font-size: 1.3rem;
+}
+
+.musicButton {
+  margin-top: 1.5rem;
+  padding: 0.8rem 2rem;
+  font-size: 1.2rem;
+  background: #00c6ff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.musicButton:hover {
+  background: #0072ff;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

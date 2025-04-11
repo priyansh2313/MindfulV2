@@ -1,11 +1,16 @@
-import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
+// vite.config.ts
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/',
-  optimizeDeps: {
-    exclude: ['lucide-react'],
+  server: {
+    proxy: {
+      "/socket.io": {
+        target: "http://localhost:3001", // Your backend
+        ws: true, // Enable WebSocket proxy
+        changeOrigin: true,
+      },
+    },
   },
 });

@@ -1,159 +1,193 @@
-/* 🌌 Background */
 .container {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
-    position: relative;
-    overflow: hidden;
-    padding: 20px;
-  }
-  
-  /* 💎 Bigger Glass Container */
-  .glassContainer {
-    position: relative;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(15px);
-    padding: 60px;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-    text-align: center;
-    max-width: 750px;
-    width: 90%;
-    animation: fadeIn 1s ease-in-out;
-  }
-  
-  /* 🌟 Light Ray Effect */
-  .lightRay {
-    position: absolute;
-    width: 150px;
-    height: 150px;
-    background: rgba(255, 255, 255, 0.3);
-    filter: blur(80px);
-    top: -50px;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: lightPulse 3s infinite ease-in-out;
-  }
-  
-  /* 🔆 Light Animation */
-  @keyframes lightPulse {
-    0% {
-      opacity: 0.5;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 1;
-      transform: scale(1.2);
-    }
-    100% {
-      opacity: 0.5;
-      transform: scale(1);
-    }
-  }
-  
-  /* ✨ Title Styling */
-  .title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-  }
-  
-  /* 📝 Subtitle */
-  .subtitle {
-    font-size: 1.2rem;
-    color: #ddd;
-    margin-bottom: 30px;
-  }
-  
-  /* 🚀 Animated Button */
-  .startButton {
-    background: linear-gradient(90deg, #ff8a00, #e52e71);
-    color: white;
-    padding: 14px 32px;
-    border-radius: 10px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  /* 🌟 Shimmer Effect */
-  .startButton::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.3);
-    transform: skewX(-45deg);
-    transition: all 0.5s ease-in-out;
-  }
-  
-  .startButton:hover::before {
-    left: 100%;
-  }
-  
-  /* 🔵 Floating Icons */
-  .floatingIcons {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    pointer-events: none;
-  }
-  
-  .icon {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    color: rgba(255, 255, 255, 0.3);
-    animation: floatIcon 6s infinite ease-in-out alternate;
-  }
-  
-  /* 🌀 Floating Icons Animation */
-  @keyframes floatIcon {
-    0% {
-      transform: translateY(0px) translateX(0px);
-    }
-    50% {
-      transform: translateY(-30px) translateX(20px);
-    }
-    100% {
-      transform: translateY(15px) translateX(-15px);
-    }
-  }
-  
-  /* 🎯 Icon Positions */
-  .icon:nth-child(1) { left: 5%; top: 10%; animation-duration: 7s; }
-  .icon:nth-child(2) { left: 20%; top: 60%; animation-duration: 6s; }
-  .icon:nth-child(3) { left: 35%; top: 20%; animation-duration: 8s; }
-  .icon:nth-child(4) { left: 50%; top: 70%; animation-duration: 7s; }
-  .icon:nth-child(5) { left: 65%; top: 30%; animation-duration: 9s; }
-  .icon:nth-child(6) { left: 80%; top: 80%; animation-duration: 6s; }
-  .icon:nth-child(7) { left: 90%; top: 40%; animation-duration: 10s; }
-  .icon:nth-child(8) { left: 25%; top: 85%; animation-duration: 7s; }
-  .icon:nth-child(9) { left: 70%; top: 10%; animation-duration: 8s; }
-  
-  /* 🌟 Fade-in Animation */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-  
+  height: 100vh;
+  background: linear-gradient(135deg, #1f1c2c, #928dab);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Floating Icons */
+.floatingIcons {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.icon {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.1);
+  animation: float 10s infinite ease-in-out;
+  font-size: 3rem;
+}
+
+.icon:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
+.icon:nth-child(2) { top: 30%; left: 70%; animation-delay: 2s; }
+.icon:nth-child(3) { top: 50%; left: 10%; animation-delay: 4s; }
+.icon:nth-child(4) { top: 60%; left: 80%; animation-delay: 6s; }
+.icon:nth-child(5) { top: 20%; left: 50%; animation-delay: 1s; }
+.icon:nth-child(6) { top: 70%; left: 30%; animation-delay: 3s; }
+.icon:nth-child(7) { top: 40%; left: 85%; animation-delay: 5s; }
+.icon:nth-child(8) { top: 80%; left: 15%; animation-delay: 7s; }
+
+@keyframes float {
+  0%   { transform: translateY(0) scale(1); opacity: 0.3; }
+  50%  { transform: translateY(-15px) scale(1.1); opacity: 0.6; }
+  100% { transform: translateY(0) scale(1); opacity: 0.3; }
+}
+
+/* Glassmorphic Container */
+.glassContainer {
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 60px 40px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 1s ease;
+}
+
+/* Light ray glow */
+.lightRay {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.05), transparent 70%);
+  animation: shine 6s infinite alternate;
+  z-index: -1;
+}
+
+@keyframes shine {
+  0%   { transform: rotate(0deg) scale(1); }
+  100% { transform: rotate(360deg) scale(1.2); }
+}
+
+/* Typography */
+.title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+/* Button */
+.startButton {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  color: #000;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.startButton:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Fade In */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+.starryBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 2s infinite ease-in-out alternate;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.3; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1.1); }
+}
+
+
+.gradientCursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.1), transparent 60%);
+  transition: background 0.1s ease;
+  z-index: 1;
+}
+
+
+.startButton {
+  margin-top: 20px;
+  padding: 14px 32px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #7f5af0, #2cb67d);
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+}
+
+.startButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Swoosh overlay effect */
+.startButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  transform: skewX(-30deg);
+  transition: left 0.6s ease-in-out;
+  z-index: 1;
+}
+
+.startButton:hover::before {
+  left: 130%;
+}

@@ -1,64 +1,77 @@
-// useMusic.ts
 import * as Tone from "tone";
+import { generateMoodDNA } from "./generateMoodDNA";
 
 let synth: Tone.PolySynth;
-let ambientPad: Tone.Synth;
-let loop: Tone.Loop;
+let padSynth: Tone.Synth;
+let drum: Tone.MembraneSynth;
+let melodyPart: Tone.Sequence;
+let padLoop: Tone.Loop;
 
 export async function generateMusic(mood: string, colors: number[][]) {
   await Tone.start();
-  console.log("Tone.js AudioContext started");
 
-  // Clear previous music
-  stopMusic();
+  const dna = generateMoodDNA(colors, mood);
+  console.log("🎼 Mood DNA:", dna);
 
-  synth = new Tone.PolySynth().toDestination();
-  ambientPad = new Tone.Synth({
+  Tone.Transport.bpm.value = dna.tempo;
+
+  // Synthesizer
+  synth = new Tone.PolySynth(Tone.Synth).toDestination();
+  synth.set({
+    oscillator: { type: dna.scale === "minor" ? "triangle" : "sine" },
+    envelope: {
+      attack: 0.5,
+      decay: 0.1,
+      sustain: 0.5,
+      release: 1,
+    },
+  });
+
+  // Pad
+  padSynth = new Tone.Synth({
     oscillator: { type: "sine" },
     envelope: {
-      attack: 2,
+      attack: 4,
       decay: 1,
       sustain: 0.5,
-      release: 5,
+      release: 6,
     },
   }).toDestination();
 
-  const colorIntensity = Math.floor(
-    colors.reduce((acc, curr) => acc + curr[0] + curr[1] + curr[2], 0) /
-    (colors.length * 3)
+  // Drums (optional)
+  drum = new Tone.MembraneSynth().toDestination();
+
+  // Pad Loop
+  padLoop = new Tone.Loop((time) => {
+    const padNote = `${dna.key}2`;
+    padSynth.triggerAttackRelease(padNote, "8n", time);
+  }, "4m").start(0);
+
+  // Melody Notes
+  const scaleMap: { [key: string]: string[] } = {
+    major: ["C", "D", "E", "G", "A"],
+    minor: ["C", "D", "D#", "G", "A#"],
+  };
+  const notes = scaleMap[dna.scale].map((n) => n.replace("C", dna.key)); // key adjusted
+
+  const melody = Array.from({ length: 8 }, () =>
+    `${notes[Math.floor(Math.random() * notes.length)]}${Math.random() > 0.5 ? "4" : "5"}`
   );
 
-  const notes = getMoodNotes(mood, colorIntensity);
-
-  // Background ambient pad
-  ambientPad.triggerAttackRelease("C4", "8n");
-
-  // Melody loop
-  loop = new Tone.Loop((time) => {
-    const note = notes[Math.floor(Math.random() * notes.length)];
+  melodyPart = new Tone.Sequence((time, note) => {
     synth.triggerAttackRelease(note, "8n", time);
-  }, "0.5");
+  }, melody, "4n").start(0);
 
-  loop.start(0);
   Tone.Transport.start();
 }
 
 export function stopMusic() {
-  if (loop) loop.stop();
-  if (synth) synth.disconnect();
-  if (ambientPad) ambientPad.disconnect();
   Tone.Transport.stop();
-}
+  Tone.Transport.cancel();
 
-function getMoodNotes(mood: string, intensity: number): string[] {
-  const chill = ["C4", "E4", "G4", "A4", "B4", "C5"];
-  const energetic = ["D4", "F4", "A4", "B4", "C5"];
-  const dark = ["C3", "Eb3", "G3", "Bb3", "C4"];
-  const happy = ["E4", "G#4", "B4", "C#5", "E5"];
-
-  if (mood.includes("dog") || mood.includes("cat") || mood.includes("happy")) return happy;
-  if (mood.includes("person") || mood.includes("sad") || intensity < 100) return dark;
-  if (mood.includes("nature") || mood.includes("landscape")) return chill;
-
-  return energetic;
+  if (melodyPart) melodyPart.dispose();
+  if (padLoop) padLoop.dispose();
+  if (synth) synth.dispose();
+  if (padSynth) padSynth.dispose();
+  if (drum) drum.dispose();
 }

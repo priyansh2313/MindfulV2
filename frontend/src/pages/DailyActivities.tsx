@@ -1,8 +1,8 @@
+// ✅ DailyActivities.tsx (Final polished version)
+
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/DailyActivities.module.css";
-
-
 
 const breathingExercises = [
   {
@@ -10,32 +10,29 @@ const breathingExercises = [
     activity: "Box Breathing",
     pattern: [4, 4, 4, 4],
     phases: ["Inhale", "Hold", "Exhale", "Hold"],
-    description: "Inhale for 4s, hold for 4s, exhale for 4s, hold for 4s.",
   },
   {
     id: 2,
     activity: "4-7-8 Breathing",
     pattern: [4, 7, 8],
     phases: ["Inhale", "Hold", "Exhale"],
-    description: "Inhale for 4s, hold for 7s, exhale for 8s.",
   },
   {
     id: 3,
     activity: "Alternate Nostril Breathing",
     pattern: [4, 4, 4, 4],
-    phases: ["Inhale (Left)", "Hold", "Exhale (Right)", "Hold"],
-    description: "Breathe in through one nostril, hold, then exhale through the other nostril.",
+    phases: ["Inhale Left", "Hold", "Exhale Right", "Hold"],
   },
 ];
 
 const affirmations = [
-  "I am enough.",
-  "I deserve love and respect.",
-  "I am stronger than my struggles.",
-  "My challenges help me grow.",
+  "I am grounded and calm.",
+  "I release tension with every breath.",
+  "Peace flows through me.",
+  "I am present in this moment.",
 ];
 
-const DailyActivities = () => {
+export default function DailyActivities() {
   const [currentExercise, setCurrentExercise] = useState(breathingExercises[0]);
   const [phaseIndex, setPhaseIndex] = useState(0);
   const [timer, setTimer] = useState(currentExercise.pattern[0]);
@@ -43,104 +40,85 @@ const DailyActivities = () => {
   const [affirmationIndex, setAffirmationIndex] = useState(0);
   const [gratitude, setGratitude] = useState("");
 
-
   useEffect(() => {
     if (!isBreathing) return;
-
     const timeout = setTimeout(() => {
-      const nextIndex = (phaseIndex + 1) % currentExercise.pattern.length;
-      setPhaseIndex(nextIndex);
-      setTimer(currentExercise.pattern[nextIndex]);
+      const next = (phaseIndex + 1) % currentExercise.pattern.length;
+      setPhaseIndex(next);
+      setTimer(currentExercise.pattern[next]);
     }, timer * 1000);
-
     return () => clearTimeout(timeout);
-  }, [isBreathing, phaseIndex, timer, currentExercise]);
+  }, [phaseIndex, timer, isBreathing, currentExercise]);
 
-  const handleExerciseChange = (exercise) => {
+  const handleExerciseChange = (ex) => {
     setIsBreathing(false);
-    setCurrentExercise(exercise);
+    setCurrentExercise(ex);
     setPhaseIndex(0);
-    setTimer(exercise.pattern[0]);
-    playClick();
+    setTimer(ex.pattern[0]);
   };
 
   const nextAffirmation = () => {
     setAffirmationIndex((prev) => (prev + 1) % affirmations.length);
-    playClick();
   };
 
   return (
-    <div className={styles.container}>
-      <motion.h1 className={styles.title} initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}>
-        🌿 Daily Mindfulness Activities
+    <div className={styles.wrapper}>
+      <motion.h1 className={styles.title} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
+        🧘 Daily Mindfulness
       </motion.h1>
 
-      {/* Breathing Animation */}
       <motion.div
+        className={styles.breathingCircle}
         animate={{ scale: isBreathing ? [1, 1.3, 1] : 1 }}
         transition={{ duration: timer, repeat: Infinity, ease: "easeInOut" }}
-        className={styles.breathingBubble}
       >
-        <motion.p className={styles.breathingText} key={phaseIndex}>
-          {currentExercise.phases[phaseIndex]}
-        </motion.p>
+        <p className={styles.phaseText}>{currentExercise.phases[phaseIndex]}</p>
+        <p className={styles.timer}>{timer}s</p>
       </motion.div>
 
-      <div className={styles.card}>
-        <h2>{currentExercise.activity}</h2>
-        <p>{currentExercise.description}</p>
-        <p className={styles.timer}>{timer}s</p>
-        <motion.button
-          onClick={() => setIsBreathing((prev) => !prev)}
-          className={`${styles.button} ${isBreathing ? styles.stop : styles.start}`}
-          whileHover={{ scale: 1.1 }}
-        >
-          {isBreathing ? "Stop" : "Start"} Breathing
-        </motion.button>
-      </div>
-
-      <div className={styles.exerciseSelector}>
+      <div className={styles.exerciseSwitcher}>
         {breathingExercises.map((ex) => (
-          <motion.button
+          <button
             key={ex.id}
             onClick={() => handleExerciseChange(ex)}
-            className={`${styles.button} ${currentExercise.id === ex.id ? styles.active : ""}`}
-            whileHover={{ scale: 1.1 }}
+            className={`${styles.exerciseButton} ${ex.id === currentExercise.id ? styles.active : ""}`}
           >
             {ex.activity}
-          </motion.button>
+          </button>
         ))}
-      </div>
-
-      <div className={styles.card}>
-        <h2>🌍 Grounding (For Anxiety)</h2>
-        <p>Think of 5 things you see, 4 you can touch, 3 you hear, 2 you can smell, 1 you can taste.</p>
-      </div>
-
-      <div className={styles.card}>
-        <h2>🧘 Body Scan Meditation (For Stress & Insomnia)</h2>
-        <p>Close your eyes. Bring awareness from your toes all the way up to your head, slowly and gently.</p>
-      </div>
-
-      <div className={styles.card}>
-        <h2>💛 Gratitude Check-in (Loneliness, Depression)</h2>
-        <textarea
-          placeholder="Write 3 things you're grateful for..."
-          value={gratitude}
-          onChange={(e) => setGratitude(e.target.value)}
-          className={styles.textarea}
-        />
-      </div>
-
-      <div className={styles.card}>
-        <h2>✨ Affirmation Practice (Self-esteem, Depression)</h2>
-        <p className={styles.affirmation}>{affirmations[affirmationIndex]}</p>
-        <button className={styles.button} onClick={nextAffirmation}>
-          Next Affirmation
+        <button onClick={() => setIsBreathing((prev) => !prev)} className={styles.breathingToggle}>
+          {isBreathing ? "Pause" : "Start"}
         </button>
       </div>
+
+      <motion.div className={styles.section} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}>
+        <h2>🌿 Grounding Technique</h2>
+        <p>5 things you see • 4 touch • 3 hear • 2 smell • 1 taste</p>
+      </motion.div>
+
+      <motion.div className={styles.section} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}>
+        <h2>🌀 Body Scan</h2>
+        <p>Close your eyes, and move your awareness from toes to head slowly.</p>
+      </motion.div>
+
+      <motion.div className={styles.affirmationBox} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}>
+        <p className={styles.affirmation}>{affirmations[affirmationIndex]}</p>
+        <button className={styles.exerciseButton} onClick={nextAffirmation}>Next</button>
+      </motion.div>
+
+      <motion.div className={styles.gratitude} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}>
+        <h2>🌸 Gratitude Reflection</h2>
+        <textarea
+          value={gratitude}
+          onChange={(e) => setGratitude(e.target.value)}
+          placeholder="Write 3 things you're grateful for today..."
+        />
+        {gratitude.length > 5 && (
+          <p style={{ color: "#2a9d8f", marginTop: "1rem" }}>
+            🌟 Thank you for reflecting today.
+          </p>
+        )}
+      </motion.div>
     </div>
   );
-};
-
-export default DailyActivities;
+}

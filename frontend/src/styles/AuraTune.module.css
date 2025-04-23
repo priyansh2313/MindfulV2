@@ -1,92 +1,20 @@
-/* AuraTune.module.css */
-
 .container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #000428, #004e92);
-  color: white;
+  padding: 4rem 2rem;
+  background: radial-gradient(circle at 30% 40%, #f0f4ff, #e0e7ff, #ffffff);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  box-shadow: inset 0 0 50px rgba(200, 200, 255, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 2rem;
   animation: fadeIn 1s ease-in;
 }
 
-.title {
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  animation: slideIn 1s ease-in-out;
-}
-
-.subtitle {
-  font-size: 1.25rem;
-  margin-bottom: 2rem;
-  opacity: 0.9;
-}
-
-.upload {
-  margin-bottom: 1rem;
-  color: white;
-}
-
-.image {
-  max-width: 70vw;
-  max-height: 60vh;
-  border-radius: 15px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-  transition: transform 0.3s ease;
-}
-
-.image:hover {
-  transform: scale(1.02);
-}
-
-.loading {
-  margin-top: 1rem;
-  font-size: 1.1rem;
-  color: #ffd700;
-}
-
-.colors {
-  display: flex;
-  gap: 10px;
-  margin-top: 1rem;
-}
-
-.colorSwatch {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  box-shadow: 0 0 5px #000;
-}
-
-.mood {
-  margin-top: 1.2rem;
-  font-size: 1.3rem;
-}
-
-.musicButton {
-  margin-top: 1.5rem;
-  padding: 0.8rem 2rem;
-  font-size: 1.2rem;
-  background: #00c6ff;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.musicButton:hover {
-  background: #0072ff;
-}
-
-/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -94,13 +22,234 @@
   }
 }
 
-@keyframes slideIn {
-  from {
+.title {
+  font-size: 2.8rem;
+  font-weight: bold;
+  text-align: center;
+  color: #222;
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #555;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.uploadSection {
+  margin: 2rem 0;
+}
+
+.dropBox {
+  border: 2px dashed #aaa;
+  border-radius: 20px;
+  padding: 2rem 3rem;
+  background: rgba(255, 255, 255, 0.7);
+  transition: background 0.3s, border 0.3s;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.dropBox:hover {
+  border-color: #6a11cb;
+  background: rgba(245, 245, 255, 0.85);
+}
+
+.icon {
+  font-size: 2.5rem;
+  color: #6a11cb;
+}
+
+.image {
+  width: 320px;
+  height: auto;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  margin-top: 2rem;
+}
+
+.resultContainer {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.loading {
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+  color: #888;
+}
+
+.colorPalette {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 1rem 0;
+}
+
+.colorSwatch {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.colorSwatch:hover {
+  transform: scale(1.15);
+}
+
+.mood {
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #444;
+}
+
+.musicButton,
+.downloadButton {
+  margin: 1rem 0.5rem;
+  padding: 0.75rem 1.8rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  color: white;
+  background: linear-gradient(to right, #ff758c, #ff7eb3);
+  box-shadow: 0 6px 14px rgba(255, 117, 140, 0.3);
+  transition: all 0.3s ease;
+}
+
+.musicButton:hover,
+.downloadButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 22px rgba(255, 117, 140, 0.4);
+}
+
+.historySection {
+  margin-top: 4rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.historySection h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.historyItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #fdfdff;
+  border-radius: 16px;
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.historyItem:hover {
+  transform: scale(1.02);
+}
+
+.historyThumb {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.historyMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.historyMeta p {
+  margin: 2px 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+
+.stepSection {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin: 3rem auto;
+  padding: 1rem;
+  max-width: 1000px;
+  animation: fadeInUp 1.2s ease forwards;
+}
+
+@keyframes fadeInUp {
+  0% {
     opacity: 0;
-    transform: translateX(-100px);
+    transform: translateY(40px);
   }
-  to {
+  100% {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 }
+
+.stepCard {
+  flex: 1;
+  min-width: 240px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 1.8rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #222;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stepCard:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 12px 36px rgba(50, 50, 150, 0.2);
+  background: linear-gradient(135deg, #f0f8ff, #e0e7ff);
+}
+
+.stepCard span {
+  font-size: 2.4rem;
+  display: block;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.stepCard:hover span {
+  transform: translateY(-6px);
+}
+
+.stepCard p {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+
+
+

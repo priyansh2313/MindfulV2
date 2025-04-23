@@ -1,112 +1,135 @@
-.container {
-  padding: 3rem;
-  max-width: 1200px;
+/* ✅ DailyActivities.module.css (final glow-up) */
+
+.wrapper {
+  max-width: 800px;
   margin: auto;
-  color: #222;
-  font-family: "Segoe UI", sans-serif;
+  padding: 2rem 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
 
 .title {
-  font-size: 2.4rem;
-  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  font-weight: bold;
   text-align: center;
-  color: #3a6351;
+  margin-bottom: 1rem;
+  color: #264653;
 }
 
-.breathingBubble {
-  width: 120px;
-  height: 120px;
+.breathingCircle {
+  width: 220px;
+  height: 220px;
+  margin: 0 auto;
   border-radius: 50%;
-  margin: 1.5rem auto;
-  background-color: #b2dfdb;
+  background: radial-gradient(circle at center, #a8dadc, #457b9d);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: all 0.3s ease;
+  box-shadow: 0 0 25px rgba(69, 123, 157, 0.5);
+  transition: all 0.3s ease-in-out;
 }
 
-.breathingText {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #004d40;
-}
-
-.card {
-  background: #f4f6f7;
-  border-radius: 12px;
-  padding: 1.5rem 2rem;
-  margin: 2rem 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.card h2 {
-  margin-bottom: 0.5rem;
-  font-size: 1.5rem;
-  color: #333;
-}
-
-.card p {
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-.button {
-  background-color: #3a6351;
-  color: white;
-  border: none;
-  padding: 0.7rem 1.5rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  margin-top: 0.5rem;
-  margin-right: 0.8rem;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.button:hover {
-  background-color: #2d4c3e;
-}
-
-.start {
-  background-color: #43a047;
-}
-
-.stop {
-  background-color: #e53935;
-}
-
-.active {
-  background-color: #00897b;
+.phaseText {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #fff;
 }
 
 .timer {
-  font-weight: bold;
-  margin-top: 0.5rem;
-  color: #555;
+  font-size: 1rem;
+  color: #f1faee;
 }
 
-.textarea {
-  width: 100%;
-  min-height: 80px;
+.exerciseSwitcher {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.exerciseButton {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: none;
+  background-color: #f1faee;
+  color: #1d3557;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.exerciseButton:hover {
+  background-color: #a8dadc;
+  color: #1d3557;
+}
+
+.active {
+  background-color: #457b9d;
+  color: #fff;
+}
+
+.breathingToggle {
+  background-color: #e63946;
+  color: #fff;
+}
+
+.section {
+  padding: 2rem;
+  background: #fdfdfd;
+  border-radius: 12px;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.04);
+  transition: all 0.4s ease;
+  text-align: left;
+}
+
+.section h2 {
+  margin-bottom: 0.5rem;
+}
+
+.affirmationBox {
+  margin-top: 1rem;
+  background: #fef6e4;
   padding: 1rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  resize: vertical;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(254, 246, 228, 0.6);
+  text-align: center;
 }
 
 .affirmation {
-  font-size: 1.2rem;
   font-style: italic;
-  margin: 1rem 0;
-  color: #555;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #7a5c42;
 }
 
-.exerciseSelector {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-  margin-top: 2rem;
+.gratitude {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+  text-align: left;
+}
+
+.gratitude h2 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.gratitude textarea {
+  width: 100%;
+  height: 100px;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem;
+  font-size: 1rem;
+  resize: none;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+  background: #ffffffcc;
+  font-family: inherit;
 }

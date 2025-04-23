@@ -1,13 +1,50 @@
 import { Brain, Cloud, Eye, Heart, Moon, Smile, Star, Sun } from "lucide-react"; // Icons
-import React from "react";
+import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/Introduction.module.css";
+
+
 
 const Introduction = () => {
   const navigate = useNavigate();
 
+
+
+  const cursorRef = useRef<HTMLDivElement>(null);
+
+const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  if (cursorRef.current) {
+    const x = `${e.clientX}px`;
+    const y = `${e.clientY}px`;
+    cursorRef.current.style.setProperty("--x", x);
+    cursorRef.current.style.setProperty("--y", y);
+  }
+};
+
+
   return (
-    <div className={styles.container}>
+
+    
+    <div className={styles.container} onMouseMove={handleMouseMove}>
+  <div className={styles.gradientCursor} ref={cursorRef} />
+      {/* Animated Stars Background */}
+<div className={styles.starryBackground}>
+  {Array.from({ length: 60 }).map((_, i) => (
+    <div
+      key={i}
+      className={styles.star}
+      style={{
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        width: `${Math.random() * 2 + 1}px`,
+        height: `${Math.random() * 2 + 1}px`,
+        animationDuration: `${Math.random() * 3 + 2}s`,
+        animationDelay: `${Math.random() * 5}s`,
+      }}
+    />
+  ))}
+</div>
+
       {/* Floating Icons */}
       <div className={styles.floatingIcons}>
         <Brain className={styles.icon} />

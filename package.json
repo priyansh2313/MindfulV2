@@ -23,6 +23,7 @@
     "emoji-picker-react": "^4.12.2",
     "express": "^4.21.2",
     "face-api.js": "^0.22.2",
+    "file-saver": "^2.0.5",
     "firebase": "^11.5.0",
     "framer-motion": "^12.4.7",
     "lucide-react": "^0.344.0",

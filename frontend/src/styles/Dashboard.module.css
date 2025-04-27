@@ -15,9 +15,16 @@ body, html {
   min-height: 100vh;
   scroll-behavior: smooth;
   display: flex;
+  background-image: url("./images/background.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   flex-direction: column;
   overflow-x: hidden;
 }
+
+
+
 
 .body{
   margin:0px
@@ -27,7 +34,8 @@ body, html {
   padding: 3rem 2rem;
   max-width: 1240px;
   margin: auto;
-  width: 100%;
+  width: 300%;
+  margin-bottom:100px;
 }
 
 .dashboardNav {
@@ -52,8 +60,8 @@ body, html {
   gap: 1rem;
 }
 
-.logoutButton,
-.mapButton {
+.logoutButton
+ {
   background: #f472b6;
   color: white;
   border: none;
@@ -67,8 +75,8 @@ body, html {
   transition: all 0.25s ease;
 }
 
-.logoutButton:hover,
-.mapButton:hover {
+.logoutButton:hover
+{
   background: #ec4899;
   transform: translateY(-2px);
 }
@@ -121,7 +129,10 @@ body, html {
 }
 
 .scrollRevealSection {
-  background: linear-gradient(to right, #fef9ff, #f0f9ff);
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   padding: 3rem 2rem;
   border-radius: 3rem 3rem 0 0;
   display: flex;
@@ -176,7 +187,7 @@ body, html {
 
 .analyticsSection {
   background: linear-gradient(to bottom, #1f1f2e, #121219);
-  color: white;
+  color: rgb(132, 33, 33);
   padding: 4rem 2rem;
   border-radius: 3rem 3rem 0 0;
   margin-top: 4rem;
@@ -300,4 +311,110 @@ body, html {
 
 .tipRefreshButton:hover {
   background: #4f46e5;
+}
+
+
+.mapButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 10px 16px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  color: #1e293b;
+  background: linear-gradient(135deg, #dbeafe, #4787c6);
+  box-shadow: 0 8px 16px rgba(30, 58, 138, 0.15);
+  transition: all 0.25s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.mapButton::before {
+  content: "📍";
+  position: absolute;
+  left: 12px;
+  font-size: 1.2rem;
+  transform: scale(0.9);
+  opacity: 0.8;
+}
+
+.mapButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(30, 64, 175, 0.2);
+  background: linear-gradient(135deg, #bfdbfe, #e0f2fe);
+  color: #0f172a;
+}
+
+
+.dashboardIcons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 7rem;
+  padding: 2rem 1rem;
+  margin-bottom: 3rem;
+}
+
+.iconButton {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  padding: 1.2rem;
+  width: 80px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(136, 165, 255, 0.3);
+  animation: popIn 0.4s ease forwards;
+}
+
+.iconButton:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 16px #a78bfa, 0 0 32px #c084fc;
+  background: linear-gradient(145deg, #f0f4ff, #ffffff);
+}
+
+.animatedIcon svg {
+  color: #7c3aed;
+  width: 28px;
+  height: 28px;
+  transition: transform 0.3s ease;
+}
+
+.iconButton:hover .animatedIcon svg {
+  transform: rotate(8deg);
+  color: #5b21b6;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+
+.profileButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: transform 0.2s ease;
+  color: #2c3e50;
+}
+
+.profileButton:hover {
+  transform: scale(1.1);
+  color: #3498db; /* optional: blue on hover */
 }

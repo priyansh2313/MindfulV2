@@ -1,164 +1,373 @@
-/* 🌟 Background Styling */
 .container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-  }
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: "Inter", sans-serif;
+  background-image:url('./images/community.jpg');
+  background-size: cover;
+ 
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+.loginScreen {
+  margin: auto;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  width:389px;
   
-  /* 📝 Login Screen */
-  .loginScreen {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    animation: fadeIn 0.8s ease-in-out;
-  }
-  
-  .title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #444;
-  }
-  
-  .inputBox {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border: 2px solid #6366f1;
-    border-radius: 8px;
-    font-size: 16px;
-  }
-  
-  .startButton {
-    background: #6366f1;
-    color: white;
-    padding: 10px;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: 0.2s;
-    margin-top: 10px;
-    box-shadow: 0px 5px 0px #4f46e5;
-  }
-  
-  .startButton:hover {
-    transform: translateY(-2px);
-    box-shadow: 0px 7px 0px #3b35c4;
-  }
-  
-  .startButton:active {
-    transform: translateY(3px);
-    box-shadow: 0px 2px 0px #2a26a1;
-  }
-  
-  /* 🔹 Chat Layout */
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputBox {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.startButton {
+  background-color: #6366f1;
+  color: white;
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.startButton:hover {
+  background-color: #4f46e5;
+}
+
+.chatContainer {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+
+
+
+
+.sidebar {
+  width: 260px;
+  min-width: 260px;
+  background: linear-gradient(to bottom, #2d3748, #1a202c); /* Dark blue-gray gradient */
+  color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 16px;
+  gap: 20px;
+  border-right: 1px solid #4a5568; /* Soft right border */
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+
+.sidebarTitle {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.roomButton {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e2e8f0;
+  padding: 10px 16px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: 0.3s ease;
+}
+
+.roomButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.activeRoom {
+  background-color: #6366f1;
+  color: white;
+}
+
+.themeToggle {
+  margin-top: 20px;
+  background: #4c51bf;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.themeToggle:hover {
+  background: #4338ca;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #4a5568;
+  margin: 12px 0;
+}
+
+
+
+
+
+
+
+.chatBox {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  position: relative;
+}
+
+.messagesContainer {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message {
+  max-width: 75%;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.myMessage {
+  align-self: flex-end;
+  background-color: #6366f1;
+  color: white;
+  border-bottom-right-radius: 0;
+}
+
+.otherMessage {
+  align-self: flex-start;
+  background-color: #e5e7eb;
+  color: black;
+  border-bottom-left-radius: 0;
+}
+
+.typing {
+  font-size: 0.9rem;
+  color: gray;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  gap: 10px;
+  background-color: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+}
+
+.inputField {
+  flex: 1;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+}
+
+.sendButton {
+  background-color: #10b981;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sendButton:hover {
+  background-color: #059669;
+}
+
+.emojiPickerWrapper {
+  position: absolute;
+  bottom: 70px;
+  left: 10px;
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
   .chatContainer {
-    display: flex;
-    width: 90%;
-    height: 80vh;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    flex-direction: column;
   }
+
   
-  /* 🟢 Online Users Sidebar */
-  .sidebar {
-    width: 20%;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.1);
-    border-right: 2px solid rgba(255, 255, 255, 0.2);
-  }
-  
-  .sidebarTitle {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .user {
-    color: #28a745;
-    font-size: 16px;
-    margin: 5px 0;
-  }
-  
-  /* 📩 Chat Box */
+
   .chatBox {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 20px;
+    height: 100%;
   }
-  
-  /* 💬 Messages */
-  .messagesContainer {
-    flex: 1;
-    overflow-y: auto;
-  }
-  
-  .message {
-    padding: 10px;
-    border-radius: 8px;
-    max-width: 60%;
-    margin-bottom: 10px;
-    animation: slideIn 0.3s ease-in-out;
-  }
-  
-  .myMessage {
-    background: #6366f1;
-    color: white;
-    align-self: flex-end;
-  }
-  
-  .otherMessage {
-    background: #eee;
-    color: #333;
-  }
-  
-  /* ⌨️ Typing Animation */
-  .typing {
-    font-style: italic;
-    color: #777;
-  }
-  
-  /* 🖊 Message Input */
+
   .inputContainer {
-    display: flex;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    flex-wrap: wrap;
   }
-  
-  .inputField {
-    flex: 1;
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-  }
-  
-  /* 🚀 Send Button */
-  .sendButton {
-    background: linear-gradient(135deg, #6366f1, #4f46e5);
-    color: white;
-    padding: 10px 15px;
-    border-radius: 8px;
-    font-weight: bold;
-    margin-left: 10px;
-  }
-  
-  /* 🌀 Animations */
-  @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
-  }
-  
-  @keyframes slideIn {
-    from { transform: translateY(10px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-  
+}
+
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
+}
+
+.messageHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.messageContent {
+  font-size: 1rem;
+}
+
+.timestamp {
+  font-size: 0.75rem;
+  color: gray;
+  margin-top: 4px;
+}
+
+.readReceipt {
+  font-size: 0.75rem;
+  color: lightgray;
+  text-align: right;
+  margin-top: 2px;
+}
+
+
+.previewBox {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.previewImage {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 8px;
+}
+
+.typingArea {
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  gap: 6px;
+  margin-top: 8px;
+  color: gray;
+}
+
+.typingDots span {
+  animation: blink 1.2s infinite;
+  margin-left: 2px;
+}
+
+.typingDots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.typingDots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0%, 20% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+
+
+.roomsTitle {
+  margin-top: 20px;
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #cbd5e1;
+}
+
+.roomsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.roomButton {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e2e8f0;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 12px;
+  text-align: left;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.roomButton:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(5px);
+}
+
+.activeRoom {
+  background-color: #6366f1;
+  color: white;
+  font-weight: bold;
+  transform: translateX(8px);
+}
+
+
+.sidebar {
+  scroll-behavior: smooth;
+  scrollbar-width: thin; /* for Firefox */
+  scrollbar-color: #6366f1 #2d3748; /* thumb / track */
+}
+
+/* For Chrome and Webkit browsers */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #6366f1;
+  border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background-color: #2d3748;
+}

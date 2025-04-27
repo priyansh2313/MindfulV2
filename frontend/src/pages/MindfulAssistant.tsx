@@ -1,68 +1,172 @@
-import { useState } from "react";
-import styles from "../styles/MindfulAssistant.module.css"; // Import the CSS module
-import BodyEmotion from "./BodyEmotion";
-import FaceEmotion from "./FaceEmotion";
-import TextSentiment from "./TextSentiment";
-import VoiceSentiment from "./VoiceSentiment";
+// src/pages/MindfulAssistantFusion.tsx
+import { AnimatePresence, motion } from "framer-motion";
+import React, { useState } from "react";
+import AssistantResponseLauncher from "../components/AssistantResponseLauncher";
+import EmotionClassifierFaceAPI from "../components/EmotionClassifierFaceMood";
+import TextSentiment from "../components/TextSentiment";
+import VoiceSentiment from "../components/VoiceSentiment";
+import styles from "../styles/MindfulAssistant.module.css";
+import { FusedMood, fuseFuzzyMood } from "../utils/fuseFuzzyMood";
 
-const MindfulAssistant = () => {
-  const [activeFeature, setActiveFeature] = useState<string | null>(null);
+const steps = ["Face", "Voice", "Text", "Result"];
 
-  const handleFeatureClick = (feature: string) => {
-    setActiveFeature(feature);
+const MindfulAssistantFusion = () => {
+  const [step, setStep] = useState(1);
+  const [faceMood, setFaceMood] = useState("neutral");
+  const [voiceMood, setVoiceMood] = useState("neutral");
+  const [textMood, setTextMood] = useState("neutral");
+  const [finalMood, setFinalMood] = useState<FusedMood | null>(null);
+  const [hasFaceInput, setHasFaceInput] = useState(false);
+  const [hasVoiceInput, setHasVoiceInput] = useState(false);
+  const [hasTextInput, setHasTextInput] = useState(false);
+
+  const handleFaceDetected = (mood: string) => {
+    setFaceMood(mood);
+    setHasFaceInput(true);
   };
 
-  const renderComponent = () => {
-    switch (activeFeature) {
-      case "voice":
-        return <VoiceSentiment />;
-      case "face":
-        return <FaceEmotion />;
-      case "body":
-        return <BodyEmotion />;
-      case "text":
-        return <TextSentiment />;
-      default:
-        return null;
-    }
+  const handleVoiceDetected = (mood: string) => {
+    setVoiceMood(mood);
+    setHasVoiceInput(true);
+  };
+
+  const handleTextDetected = (mood: string) => {
+    setTextMood(mood);
+    const result = fuseFuzzyMood(faceMood, voiceMood, mood);
+    setFinalMood(result);
+    setHasTextInput(true);
   };
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>🧘‍♀️ Mindful Assistant</h1>
+      <motion.h1
+        className={styles.title}
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        🧘 Mindful Assistant
+      </motion.h1>
 
-      {activeFeature === null ? (
-        <div className={styles.buttonContainer}>
-          <button
-            onClick={() => handleFeatureClick("voice")}
-            className={`${styles.featureButton} ${styles.voice}`}
+      <div className={styles.progressBar}>
+        {steps.map((label, index) => (
+          <div
+            key={index}
+            className={`${styles.progressStep} ${
+              step - 1 >= index ? styles.activeStep : ""
+            }`}
           >
-            🎤 Voice Sentiment
-          </button>
-          <button
-            onClick={() => handleFeatureClick("face")}
-            className={`${styles.featureButton} ${styles.face}`}
+            <span>{label}</span>
+          </div>
+        ))}
+      </div>
+
+      <AnimatePresence mode="wait">
+        {step === 1 && (
+          <motion.div
+            key="step1"
+            className={styles.moduleBox}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
           >
-            🎭 Face Emotion
-          </button>
-          <button
-            onClick={() => handleFeatureClick("body")}
-            className={`${styles.featureButton} ${styles.body}`}
+            <p className={styles.prompt}>🧠 Show us how you feel</p>
+            <EmotionClassifierFaceAPI onMoodDetected={handleFaceDetected} />
+            {hasFaceInput && (
+              <motion.button
+                className={styles.continueButton}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setStep(2)}
+              >
+                Continue
+              </motion.button>
+            )}
+          </motion.div>
+        )}
+
+        {step === 2 && (
+          <motion.div
+            key="step2"
+            className={styles.moduleBox}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
           >
-            🕺 Body Emotion
-          </button>
-          <button
-            onClick={() => handleFeatureClick("text")}
-            className={`${styles.featureButton} ${styles.text}`}
+            <p className={styles.prompt}>🎤 Tell us how you feel</p>
+            <VoiceSentiment onMoodDetected={handleVoiceDetected} />
+            {hasVoiceInput && (
+              <motion.button
+                className={styles.continueButton}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setStep(3)}
+              >
+                Continue
+              </motion.button>
+            )}
+          </motion.div>
+        )}
+
+        {step === 3 && (
+          <motion.div
+            key="step3"
+            className={styles.moduleBox}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
           >
-            📝 Text Sentiment
-          </button>
-        </div>
-      ) : (
-        <div className={styles.componentContainer}>{renderComponent()}</div>
-      )}
+            <p className={styles.prompt}>📝 Write how you feel</p>
+            <TextSentiment onMoodDetected={handleTextDetected} />
+            {hasTextInput && finalMood && (
+              <motion.button
+                className={styles.continueButton}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setStep(4)}
+              >
+                Continue
+              </motion.button>
+            )}
+          </motion.div>
+        )}
+
+        {step === 4 && finalMood && (
+          <motion.div
+            key="step4"
+            className={styles.moduleBox}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className={styles.fusedResult}>
+              <h2>🧬 Fused Mood: <span>{finalMood}</span></h2>
+              <p>This is your combined emotion based on voice, text & face.</p>
+            </div>
+
+            <AssistantResponseLauncher mood={finalMood} />
+
+            <div className={styles.reportBox}>
+              <h3>🧾 Emotional Insight Report</h3>
+              <ul>
+                <li><strong>🎭 Face Mood:</strong> {faceMood}</li>
+                <li><strong>🔊 Voice Mood:</strong> {voiceMood}</li>
+                <li><strong>📝 Text Mood:</strong> {textMood}</li>
+                <li><strong>🧬 Fused Mood:</strong> {finalMood}</li>
+              </ul>
+              <p className={styles.tipText}>
+                Remember: Emotions are waves 🌊 — observe, breathe, and let them pass.
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
 
-export default MindfulAssistant;
+export default MindfulAssistantFusion;

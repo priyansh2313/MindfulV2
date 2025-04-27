@@ -1,0 +1,71 @@
+/* SleepTracker.module.css */
+
+
+
+
+
+
+.sleepTrackerContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: #fef9f6;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+  }
+
+
+
+  
+  .sleepTitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1e3a8a;
+  }
+  
+  .sleepInputGroup {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    align-items: center;
+    margin: 1rem 0;
+  }
+  
+  .sleepInputGroup input {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    width: 80px;
+    font-size: 1rem;
+  }
+  
+  .sleepInputGroup button {
+    background: linear-gradient(to right, #4f46e5, #7c3aed);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: transform 0.2s ease;
+  }
+  
+  .sleepInputGroup button:hover {
+    transform: translateY(-2px);
+  }
+  
+  .sleepEmoji {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .sleepChartWrapper {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.05);
+  }
+  

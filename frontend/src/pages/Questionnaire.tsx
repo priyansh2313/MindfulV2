@@ -69,7 +69,7 @@ const Questionnaire = () => {
     <div className={styles.questionnaire_container}>
       {/* 🔥 Branding (Top-Left) */}
       <div className={styles.questionnaire_branding}>
-        <img src="brain-glow.png" alt="Mindful AI Logo" className={styles.questionnaire_brainIcon} />
+        <img src="./images/logo.png" alt="Mindful AI Logo" className={styles.questionnaire_brainIcon} />
         <h1 className={styles.questionnaire_brandText}>MINDFUL AI</h1>
       </div>
 

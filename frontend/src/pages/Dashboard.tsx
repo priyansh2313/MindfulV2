@@ -9,10 +9,11 @@ import {
   LogOut,
   MapPin,
   MessageSquareHeart,
+  Moon,
   Music,
   Smile,
   TrendingUp,
-  Users,
+  Users
 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +21,9 @@ import EvaluationGraph from "../pages/EvaluationGraph";
 import FloatingChatbot from "../pages/FloatingChatbot";
 import FloatingLeaves from "../pages/FloatingLeaves";
 import styles from "../styles/Dashboard.module.css";
+
+
+
 
 
 const tips = [
@@ -87,17 +91,28 @@ const Dashboard = () => {
         <nav className={styles.dashboardNav}>
           <h1 className={styles.dashboardTitle}>MINDFUL AI</h1>
           <div className={styles.navButtons}>
-            <button
-              onClick={() => navigate("/nearby-professionals")}
-              className={styles.mapButton}
-              title="Find Nearby Professionals"
-            >
-              <MapPin size={20} />
-            </button>
-            <button onClick={() => navigate("/")} className={styles.logoutButton}>
-              <LogOut className={styles.logoutIcon} /> Logout
-            </button>
-          </div>
+    <button
+      onClick={() => navigate("/nearby-professionals")}
+      className={styles.mapButton}
+      title="Find Nearby Professionals"
+    >
+      <MapPin size={20} />
+    </button>
+
+    {/* ⭐ NEW PROFILE BUTTON ⭐ */}
+    <button
+      onClick={() => navigate("/profile")}
+      className={styles.profileButton}
+      title="My Profile"
+    >
+      <Smile size={20} />
+    </button>
+
+    <button onClick={() => navigate("/")} className={styles.logoutButton}>
+      <LogOut className={styles.logoutIcon} /> Logout
+    </button>
+</div>
+
         </nav>
         
         <div className={styles.dashboardGrid}>
@@ -116,6 +131,8 @@ const Dashboard = () => {
           <DashboardCard title="Daily Activities" description="Mindfulness exercises" icon={<Activity className={styles.cardIcon} />} onClick={() => navigate("/daily-activities")} onHoverEnter={() => setHoveredSection("Daily Activities")}
   onHoverLeave={() => setHoveredSection(null)} />
           <DashboardCard title="Image Analyzer" description="Analyze your images" icon={<Image className={styles.cardIcon} />} onClick={() => navigate("/image-analyzer")} onHoverEnter={() => setHoveredSection("Image Analyzer")}
+  onHoverLeave={() => setHoveredSection(null)} />
+  <DashboardCard title="Sleep Cycle Analysis" description="Analysing your sleep for better mental health" icon={<Moon className={styles.cardIcon} />} onClick={() => navigate("/SleepCycleSection")} onHoverEnter={() => setHoveredSection("SleepCycleSection")}
   onHoverLeave={() => setHoveredSection(null)} />
         </div>
       </div>
@@ -197,9 +214,14 @@ const Dashboard = () => {
             <div className={styles.widgetHeader}><Lightbulb /> Mental Health Tip</div>
             <p className={styles.widgetTip}>{tip}</p>
             <button onClick={refreshTip} className={styles.tipRefreshButton}>Refresh Tip</button>
+            
           </div>
         </div>
       </div>
+
+
+      
+
 
       {/* ✅ Floating chatbot now handled correctly */}
       <FloatingChatbot
@@ -225,9 +247,18 @@ const DashboardCard = ({ title, description, icon, onClick, onHoverEnter, onHove
         <h3 className={styles.cardTitle}>{title}</h3>
         <p className={styles.cardDescription}>{description}</p>
       </div>
+      
     </div>
+    
   </div>
+  
 );
+
+
+
+
+
+
 
 
 export default Dashboard;

@@ -16,18 +16,45 @@ export default function Login() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    const authInstance = auth;
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      // First try to sign in
+      const result = await signInWithEmailAndPassword(authInstance, email, password);
+      const userEmail = result.user.email;
+      if (userEmail) {
+        localStorage.setItem('userEmail', userEmail);
+      }
       navigate("/dashboard");
     } catch (err: any) {
-      setError("Invalid email or password.");
+      if (err.code === "auth/user-not-found") {
+        // If user not found, automatically create account
+        try {
+          const signupResult = await createUserWithEmailAndPassword(authInstance, email, password);
+          const newUserEmail = signupResult.user.email;
+          if (newUserEmail) {
+            localStorage.setItem('userEmail', newUserEmail);
+          }
+          navigate("/dashboard");
+        } catch (signupError: any) {
+          console.error(signupError);
+          setError(signupError.message);
+        }
+      } else {
+        console.error(err);
+        setError("Invalid credentials or login failed.");
+      }
     }
   };
+  
 
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, provider);
+      const userEmail = result.user.email;
+      if (userEmail) {
+        localStorage.setItem('userEmail', userEmail);
+      }
       navigate("/dashboard");
     } catch (err: any) {
       setError("Google sign-in failed.");

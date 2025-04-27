@@ -1,0 +1,109 @@
+/* Profile.module.css */
+
+/* Container for the Profile Page */
+.profileContainer {
+    max-width: 600px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f0faff, #e0f7fa);
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 0.8s ease;
+  }
+  
+  /* Title */
+  .profileTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: #34495e;
+  }
+  
+  /* Inputs and Textarea */
+  .inputField {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid #d0e6f7;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    background: white;
+    transition: all 0.3s ease;
+  }
+  
+  .inputField:focus {
+    border-color: #4facfe;
+    background-color: #f9fdff;
+    outline: none;
+  }
+  
+  .textareaField {
+    height: 120px;
+    resize: none;
+  }
+  
+  /* Save Button */
+  .saveButton {
+    width: 100%;
+    padding: 0.9rem;
+    margin-top: 1rem;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.3s ease;
+  }
+  
+  .saveButton:hover {
+    background: linear-gradient(to right, #43e97b, #38f9d7);
+    transform: scale(1.05);
+  }
+  
+  /* Success Message */
+  .successMessage {
+    margin-top: 1.5rem;
+    color: #27ae60;
+    font-weight: 600;
+    font-size: 1.1rem;
+    animation: pop 0.5s ease;
+  }
+  
+  /* Loader Styles */
+  .loaderContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+  }
+  
+  .loader {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #4facfe;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 0.9s linear infinite;
+  }
+  
+  /* Animations */
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px);}
+    to { opacity: 1; transform: translateY(0);}
+  }
+  
+  @keyframes pop {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  

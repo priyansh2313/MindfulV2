@@ -1,0 +1,75 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(31, 41, 55, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  .modalContent {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    animation: slideIn 0.4s ease;
+  }
+  
+  .modalContent h2 {
+    margin-bottom: 1.2rem;
+    color: #1f2937;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 1rem;
+    color: #374151;
+    font-weight: 600;
+  }
+  
+  input,
+  select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+  }
+  
+  .buttonGroup {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+  }
+  
+  button {
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #6366f1;
+    color: white;
+  }
+  
+  .cancelBtn {
+    background: #e11d48;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  

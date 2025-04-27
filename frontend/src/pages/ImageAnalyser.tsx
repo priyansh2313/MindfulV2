@@ -173,12 +173,7 @@ export default function ImageAnalyser() {
               </>
             )
           )}
-          <div className={styles.progressBarContainer}>
-  <div
-    className={styles.progressBarFill}
-    style={{ width: `${progress}%` }}
-  />
-</div>
+         
 
         </div>
       )}

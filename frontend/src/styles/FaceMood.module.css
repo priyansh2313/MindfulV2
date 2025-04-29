@@ -1,0 +1,78 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #1f1c2c, #928dab);
+  overflow: hidden;
+  padding: 20px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease-in-out;
+}
+
+.video {
+  width: 100%;
+  height: auto;
+  border-radius: 24px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+  filter: contrast(1.1) brightness(1.05);
+}
+
+.moodFloatingBox {
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 16px 28px;
+  border-radius: 20px;
+  text-align: center;
+  min-width: 220px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+  animation: slideFadeIn 0.5s ease-out;
+  backdrop-filter: blur(14px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 100;
+}
+
+.emoji {
+  font-size: 2.8rem;
+  display: block;
+  animation: pulseEmoji 1.6s infinite;
+}
+
+.moodText {
+  margin-top: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #c8e6ff;
+  letter-spacing: 0.7px;
+  text-transform: capitalize;
+}
+
+@keyframes slideFadeIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes pulseEmoji {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}

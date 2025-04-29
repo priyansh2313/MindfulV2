@@ -1,9 +1,8 @@
 import * as mobilenet from "@tensorflow-models/mobilenet";
-import "@tensorflow/tfjs-backend-cpu";
-import "@tensorflow/tfjs-backend-webgl";
 import ColorThief from "colorthief";
 import React, { useRef, useState } from "react";
 import styles from "../styles/AuraTune.module.css";
+
 import { exportMP3, generateMusicEnhanced, stopMusicEnhanced } from "./enhancedMusicEngine";
 import { generateMoodDNA, MoodDNA } from "./generateMoodDNA";
 
@@ -173,12 +172,7 @@ export default function ImageAnalyser() {
               </>
             )
           )}
-          <div className={styles.progressBarContainer}>
-  <div
-    className={styles.progressBarFill}
-    style={{ width: `${progress}%` }}
-  />
-</div>
+         
 
         </div>
       )}

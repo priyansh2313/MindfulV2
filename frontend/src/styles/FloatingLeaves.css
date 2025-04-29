@@ -1,0 +1,33 @@
+.leafContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+  }
+  
+  .leaf {
+    position: absolute;
+    top: -60px;
+    background-image: url("./images/leaf.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.6;
+    animation-name: fall;
+    animation-timing-function: linear;
+  }
+  
+  @keyframes fall {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateY(100vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+  

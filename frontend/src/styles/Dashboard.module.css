@@ -1,622 +1,420 @@
-/* 🎨 Soft, Calming UI */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
-
-html, body {
+/* Redesigned Dashboard.module.css – Mindful, Elegant, Smooth */
+body, html {
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-x: hidden;
+  background: #f0f4f8; /* or match your main background */
 }
+   
+
+
+
 
 .dashboardContainer {
-  position: relative;
+  background: linear-gradient(180deg, #f0f4f8 0%, #faf3ff 40%, #181827 100%);
   min-height: 100vh;
-  background: linear-gradient(to bottom, #c7e9fb, #f5d7e3);
+  scroll-behavior: smooth;
+  display: flex;
+  background-image: url("./images/background.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  flex-direction: column;
   overflow-x: hidden;
-  color: #2b2b2b;
-  text-align: center;
-  font-family: "Poppins", sans-serif;
-  transition: background 0.5s ease-in-out;
 }
 
-/* 🌊 Background Overlay - Wavy Effect */
-.backgroundOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url("https://www.transparenttextures.com/patterns/soft-wallpaper.png");
-  opacity: 0.2;
-  z-index: -1;
+
+
+
+.body{
+  margin:0px
 }
 
-/* 🌟 Main Dashboard Panel */
 .dashboardPanel {
-  padding: 4rem 2rem;
-  max-width: 1100px;
+  padding: 3rem 2rem;
+  max-width: 1240px;
   margin: auto;
+  width: 300%;
+  margin-bottom:100px;
 }
 
-/* 🏡 Navbar */
 .dashboardNav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
-  border-bottom: 2px solid rgba(255, 182, 193, 0.6);
-  padding-bottom: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
 }
 
 .dashboardTitle {
   font-size: 2.5rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  background: linear-gradient(45deg, #ffafbd, #ffc3a0);
+  font-weight: 700;
+  background: linear-gradient(to right, #7c3aed, #f472b6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
-
-/* 🚪 Logout Button */
-.logoutButton {
-  background: #ff7eb3;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 15px;
-  font-size: 1rem;
-  cursor: pointer;
-  border: none;
-  transition: 0.3s ease;
-  box-shadow: 0 4px 10px rgba(255, 126, 179, 0.5);
-}
-
-.logoutButton:hover {
-  background: #ff4d94;
-  transform: scale(1.05);
-}
-
-/* 🔳 Dashboard Grid */
-.dashboardGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  justify-content: center;
-}
-
-/* 🟦 Dashboard Cards */
-.dashboardCard {
-  background: white;
-  border-radius: 15px;
-  padding: 2rem;
-  text-align: center;
-  transition: 0.3s ease-in-out;
-  position: relative;
-  cursor: pointer;
-  border: none;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.dashboardCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(255, 126, 179, 0.4);
-}
-
-/* 🎭 Card Content */
-.cardContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.iconContainer {
-  font-size: 2rem;
-  color: #ff7eb3;
-  margin-bottom: 10px;
-}
-
-.cardTitle {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #444;
-}
-
-.cardDescription {
-  font-size: 1rem;
-  color: #777;
-}
-
-/* 🌸 Scroll Section */
-.scrollRevealSection {
-  margin-top: 4rem;
-  padding: 4rem;
-  background: linear-gradient(to right, #ffafbd, #ffc3a0);
-  border-radius: 15px;
-  text-align: center;
-  box-shadow: 0 5px 15px rgba(255, 126, 179, 0.3);
-}
-
-.scrollImage {
-  width: 100%;
-  max-width: 600px;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-  box-shadow: 0 4px 10px rgba(255, 126, 179, 0.5);
-}
-
-.scrollTitle {
-  font-size: 2.2rem;
-  font-weight: 600;
-  color: white;
-}
-
-.highlight {
-  color: #ff7eb3;
-  text-shadow: 0 0 10px rgba(255, 126, 179, 0.8);
-}
-
-.scrollDescription {
-  font-size: 1.2rem;
-  color: white;
-  margin-bottom: 1rem;
-}
-
-/* 💡 Call to Action Button */
-.ctaButton {
-  background: white;
-  color: #ff7eb3;
-  padding: 14px 24px;
-  border-radius: 15px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  transition: 0.3s;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(255, 126, 179, 0.5);
-}
-
-.ctaButton:hover {
-  background: #ff7eb3;
-  color: white;
-  transform: scale(1.05);
-}
-
 
 .navButtons {
   display: flex;
-  gap: 0.75rem;
-  align-items: center;
+  gap: 1rem;
 }
 
-.nearbyIcon {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: linear-gradient(135deg, #00d4ff, #0076ff);
-  border: none;
-  padding: 12px;
-  border-radius: 50%;
-  box-shadow: 0 0 10px #00d4ff;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
+.logoutButton
+ {
+  background: #f472b6;
   color: white;
-  z-index: 1000;
-}
-
-.nearbyIcon:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 15px #00d4ff;
-}
-
-/* Map Modal Styles */
-.mapModalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  border: none;
+  padding: 0.6rem 1.1rem;
+  font-weight: 600;
+  border-radius: 10px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  z-index: 9999;
+  gap: 0.5rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  transition: all 0.25s ease;
 }
 
-.mapModal {
-  position: relative;
-  width: 90%;
-  max-width: 900px;
-  height: 80%;
-  background-color: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+.logoutButton:hover
+{
+  background: #ec4899;
+  transform: translateY(-2px);
 }
 
-.mapIframe {
-  width: 100%;
-  height: 100%;
-  border: none;
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 5rem;
 }
 
-.closeMap {
-  position: absolute;
-  top: 10px;
-  right: 14px;
-  background: #ff5e5e;
-  color: white;
-  border: none;
-  font-size: 18px;
-  padding: 6px 10px;
-  border-radius: 6px;
+.dashboardCard {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 1.25rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
   cursor: pointer;
-  z-index: 10;
+  position: relative;
+}
+
+.dashboardCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.08);
+}
+
+.cardIcon {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: #7c3aed;
+  transition: transform 0.3s ease;
+}
+
+.dashboardCard:hover .cardIcon {
+  transform: scale(1.15);
+}
+
+.cardTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: #111827;
+}
+
+.cardDescription {
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+.scrollRevealSection {
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 3rem 2rem;
+  border-radius: 3rem 3rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.06);
+}
+
+.scrollImage {
+  width: 260px;
+  border-radius: 1.2rem;
+  object-fit: cover;
+}
+
+.scrollContent {
+  text-align: center;
+  flex: 1;
+}
+
+.scrollTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.highlight {
+  color: #7c3aed;
+}
+
+.scrollDescription {
+  color: #4b5563;
+  margin: 1rem 0;
+  font-size: 1rem;
+}
+
+.ctaButton {
+  background: #7c3aed;
+  color: white;
+  padding: 0.6rem 1.4rem;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+  background: #6d28d9;
+  transform: scale(1.05);
 }
 
 .analyticsSection {
-  padding: 2rem 1.5rem;
-  margin-top: 3rem;
-  background-color: #f9fafc;
-  border-top: 2px solid #e0e0e0;
+  background: linear-gradient(to bottom, #1f1f2e, #121219);
+  color: rgb(132, 33, 33);
+  padding: 4rem 2rem;
+  border-radius: 3rem 3rem 0 0;
+  margin-top: 4rem;
 }
 
 .analyticsHeading {
-  font-size: 1.8rem;
-  font-weight: 600;
+  font-size: 1.75rem;
+  font-weight: 700;
   margin-bottom: 2rem;
-  color: #333;
   text-align: center;
 }
 
 .graphContainer {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 3rem;
+  background: #26263f;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
 }
 
 .dashboardWidgets {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
 }
 
 .widgetCard {
-  background: #ffffff;
+  background: #2e2f4f;
+  border-radius: 1.2rem;
   padding: 1.5rem;
-  border-radius: 14px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  width: 280px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+  color: #f0f0f0;
 }
 
 .widgetHeader {
   font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 1rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
-  color: #333;
+  gap: 0.6rem;
 }
 
 .moodOptions {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 0.4rem;
   margin-bottom: 0.5rem;
 }
 
 .moodButton {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   background: transparent;
   border: none;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
 
-.moodButton:hover {
-  transform: scale(1.2);
-}
-
 .activeMood {
-  transform: scale(1.4);
+  transform: scale(1.2);
+  outline: 2px solid #fff;
+  border-radius: 50%;
 }
 
-.widgetNote {
-  font-size: 0.95rem;
-  color: #555;
+.moodHistory {
+  font-size: 0.9rem;
+  color: #cbd5e1;
 }
 
 .progressCircle {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem 0;
+  width: 80px;
+  margin: auto;
   position: relative;
 }
 
 .circularChart {
-  width: 80px;
-  height: 80px;
+  width: 100%;
   transform: rotate(-90deg);
 }
 
 .circleBg {
   fill: none;
-  stroke: #eee;
-  stroke-width: 3.8;
+  stroke: #444;
+  stroke-width: 2.8;
 }
 
 .circle {
   fill: none;
-  stroke: #4facfe;
-  stroke-width: 3.8;
+  stroke: #38bdf8;
+  stroke-width: 2.8;
   stroke-linecap: round;
+  transition: stroke-dasharray 0.5s ease;
 }
 
 .percentageText {
   position: absolute;
-  font-weight: bold;
-  font-size: 1.2rem;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.9rem;
+  color: white;
 }
 
 .widgetTip {
+  font-style: italic;
   font-size: 0.95rem;
-  color: #444;
-  margin-top: 0.5rem;
-}
-
-.activeMood {
-  transform: scale(1.4);
-  transition: transform 0.2s ease-in-out;
-}
-
-.moodHistory {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
-  color: #777;
-}
-
-.historyEmoji {
-  margin-right: 4px;
-  font-size: 1.2rem;
+  color: #d1d5db;
+  margin-bottom: 1rem;
 }
 
 .tipRefreshButton {
-  margin-top: 0.75rem;
-  padding: 0.4rem 0.8rem;
-  background-color: #4facfe;
-  color: #fff;
+  padding: 0.4rem 1rem;
+  font-size: 0.8rem;
   border: none;
   border-radius: 6px;
+  background: #6366f1;
+  color: #fff;
   cursor: pointer;
-  font-size: 0.85rem;
-  transition: background-color 0.2s ease;
+  transition: background 0.2s ease;
 }
 
 .tipRefreshButton:hover {
-  background-color: #2f80ed;
+  background: #4f46e5;
 }
 
-.widgetCard:hover {
-  transform: translateY(-5px);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+
+.mapButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 10px 16px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  color: #1e293b;
+  background: linear-gradient(135deg, #dbeafe, #4787c6);
+  box-shadow: 0 8px 16px rgba(30, 58, 138, 0.15);
+  transition: all 0.25s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Optional: Specific Icon Color Enhancements */
-.dashboardCard:nth-child(6) .iconContainer {
-  color: #7f53ac; /* Encyclopedia (Brain) */
+.mapButton::before {
+  content: "📍";
+  position: absolute;
+  left: 12px;
+  font-size: 1.2rem;
+  transform: scale(0.9);
+  opacity: 0.8;
 }
 
-.dashboardCard:nth-child(7) .iconContainer {
-  color: #00c9a7; /* Daily Activities (Activity) */
+.mapButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(30, 64, 175, 0.2);
+  background: linear-gradient(135deg, #bfdbfe, #e0f2fe);
+  color: #0f172a;
 }
 
-.dashboardCard:nth-child(8) .iconContainer {
-  color: #f39c12; /* Image Analyzer (Image) */
+
+.dashboardIcons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 7rem;
+  padding: 2rem 1rem;
+  margin-bottom: 3rem;
 }
 
-.notificationBanner {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: #ff7eb3;
-  color: white;
-  padding: 15px;
-  text-align: center;
-  font-weight: bold;
-  display: none;
-  z-index: 100;
+.iconButton {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  padding: 1.2rem;
+  width: 80px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(136, 165, 255, 0.3);
+  animation: popIn 0.4s ease forwards;
 }
 
-.notificationBanner.show {
-  display: block;
-  animation: slideDown 0.5s ease-out;
+.iconButton:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 16px #a78bfa, 0 0 32px #c084fc;
+  background: linear-gradient(145deg, #f0f4ff, #ffffff);
 }
 
-@keyframes slideDown {
+.animatedIcon svg {
+  color: #7c3aed;
+  width: 28px;
+  height: 28px;
+  transition: transform 0.3s ease;
+}
+
+.iconButton:hover .animatedIcon svg {
+  transform: rotate(8deg);
+  color: #5b21b6;
+}
+
+@keyframes popIn {
   from {
-    top: -50px;
+    transform: scale(0.7);
+    opacity: 0;
   }
   to {
-    top: 0;
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
 
-.floatingChat {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 999;
-}
 
-.chatToggle {
-  background-color: #4facfe;
-  color: white;
-  font-size: 20px;
-  padding: 12px;
-  border-radius: 50%;
+.profileButton {
+  background: none;
   border: none;
   cursor: pointer;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  margin-left: 10px;
+  transition: transform 0.2s ease;
+  color: #2c3e50;
 }
 
-.chatToggle:hover {
-  background-color: #38f9d7;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-.analyticsSection {
-  padding: 40px 20px;
-  background: linear-gradient(145deg, #1e1f2f, #2a2c3f);
-  color: #fff;
-  border-radius: 20px;
-  margin-top: 40px;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-}
-
-.analyticsHeading {
-  font-size: 2.2rem;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 30px;
-  background: linear-gradient(to right, #7f00ff, #e100ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.graphContainer {
-  margin-bottom: 40px;
-  padding: 20px;
-  border-radius: 16px;
-  background-color: rgba(255, 255, 255, 0.05);
-  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
-}
-
-.dashboardWidgets {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 30px;
-}
-
-.widgetCard {
-  background: rgba(255, 255, 255, 0.07);
-  border-radius: 20px;
-  padding: 20px;
-  width: 300px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.widgetCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
-}
-
-.widgetHeader {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 15px;
-  color: #ffcbf2;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.moodOptions {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.moodButton {
-  font-size: 1.5rem;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-.activeMood {
-  border: 2px solid #fff;
-  border-radius: 50%;
-  padding: 4px;
-}
-
-.widgetNote {
-  font-size: 0.95rem;
-  margin-top: 15px;
-  color: #ccc;
-}
-
-.moodHistory {
-  margin-top: 10px;
-  font-size: 0.9rem;
-  color: #aaa;
-}
-
-.progressCircle {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 120px;
-  position: relative;
-}
-
-.circularChart {
-  width: 100px;
-  height: 100px;
-  transform: rotate(-90deg);
-}
-
-.circleBg {
-  fill: none;
-  stroke: #2c2c3c;
-  stroke-width: 3.8;
-}
-
-.circle {
-  fill: none;
-  stroke: #00c6ff;
-  stroke-width: 3.8;
-  stroke-linecap: round;
-  transition: stroke-dasharray 0.6s ease;
-}
-
-.percentageText {
-  position: absolute;
-  font-size: 1.3rem;
-  color: #fff;
-  font-weight: bold;
-}
-
-.widgetTip {
-  color: #fceabb;
-  font-style: italic;
-  margin-bottom: 10px;
-}
-
-.tipRefreshButton {
-  background: #333;
-  color: #fff;
-  padding: 8px 14px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.tipRefreshButton:hover {
-  background: #444;
+.profileButton:hover {
+  transform: scale(1.1);
+  color: #3498db; /* optional: blue on hover */
 }

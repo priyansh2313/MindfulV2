@@ -1,8 +1,10 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { Brain } from "lucide-react";
+
+
+import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { motion } from "framer-motion";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../firebase"; // Import Firebase auth
+import { useNavigate } from "react-router-dom";
+import { auth } from "../firebase";
 import styles from "../styles/Login.module.css";
 import axios from "../hooks/axios/axios";
 import { setUser } from "../redux/slices/userSlice";

@@ -1,107 +1,185 @@
+/* FloatingChatbot.module.css – Enhanced with Assistant Orb + Float Effects */
+
 .chatbotWrapper {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    z-index: 1000;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+}
+
+/* Floating action button */
+.floatingButton {
+  background: linear-gradient(135deg, #051f93, #764ba2);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  font-size: 1.5rem;
+  z-index: 1001;
+}
+
+.floatingButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+/* Chat window styling */
+.chatWindow {
+  position: fixed;
+  bottom: 100px;
+  right: 24px;
+  width: 360px;
+  max-height: 520px;
+  background: #202333;
+  color: #f0f0f0;
+  border-radius: 16px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideUp 0.35s ease;
+  border: 1px solid #2f2f44;
+  z-index: 1002;
+}
+
+/* Chat header */
+.chatHeader {
+  background: #2d2f45;
+  padding: 14px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #3c3c55;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: #f0f0f0;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: transform 0.2s ease;
+}
+
+.closeBtn:hover {
+  transform: rotate(90deg);
+}
+
+/* Slide animation */
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
   }
-  
-  /* Floating action button */
-  .floatingButton {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 64px;
-    height: 64px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    font-size: 1.5rem;
-    z-index: 1001;
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
-  
-  .floatingButton:hover {
-    transform: scale(1.1);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+/* Chat container (MindfulChat inside) */
+.chatContainer {
+  background: #202333;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 16px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #555 transparent;
+}
+
+.chatContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chatContainer::-webkit-scrollbar-thumb {
+  background-color: #666;
+  border-radius: 6px;
+}
+
+/* Assistant Avatar Orb */
+.avatarAssistant {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #a78bfa, #7c3aed);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.8rem;
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+  animation: floaty 4s ease-in-out infinite;
+  cursor: pointer;
+  z-index: 99;
+  transition: transform 0.2s ease;
+}
+
+.avatarAssistant:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 28px rgba(168, 85, 247, 0.7);
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+.tipBubble {
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+  transform: translateX(0%);
+  background: #2e2e4e;
+  color: #f0f0f0;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  animation: fadeInOut 6s ease-in-out;
+  z-index: 1000;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(10px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(10px); }
+}
+
+
+.pulse {
+  animation: pulseGlow 1s infinite alternate;
+  box-shadow: 0 0 18px rgba(190, 120, 255, 0.6);
+}
+
+@keyframes pulseGlow {
+  from {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(190, 120, 255, 0.4);
   }
-  
-  /* Chat window styling */
-  .chatWindow {
-    position: fixed;
-    bottom: 100px;
-    right: 24px;
-    width: 360px;
-    max-height: 520px;
-    background: #202333;
-    color: #f0f0f0;
-    border-radius: 16px;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    animation: slideUp 0.35s ease;
-    border: 1px solid #2f2f44;
-    z-index: 1002;
+  to {
+    transform: scale(1.08);
+    box-shadow: 0 0 22px rgba(190, 120, 255, 0.8);
   }
-  
-  /* Chat header */
-  .chatHeader {
-    background: #2d2f45;
-    padding: 14px 18px;
-    font-size: 1rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #3c3c55;
-  }
-  
-  .closeBtn {
-    background: none;
-    border: none;
-    color: #f0f0f0;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: transform 0.2s ease;
-  }
-  
-  .closeBtn:hover {
-    transform: rotate(90deg);
-  }
-  
-  /* Slide animation */
-  @keyframes slideUp {
-    from {
-      transform: translateY(30px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-  
-  /* Chat container (MindfulChat inside) */
-  .chatContainer {
-    background: #202333;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 12px 16px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #555 transparent;
-  }
-  
-  .chatContainer::-webkit-scrollbar {
-    width: 6px;
-  }
-  
-  .chatContainer::-webkit-scrollbar-thumb {
-    background-color: #666;
-    border-radius: 6px;
-  }
-  
+}

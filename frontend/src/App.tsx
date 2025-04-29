@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import 'regenerator-runtime/runtime';
+import SleepCycleSection from './components/SleepCycleSection';
 import CaseHistory from './pages/CaseHistory';
 import Community from './pages/Community';
 import DailyActivities from "./pages/DailyActivities";
@@ -13,6 +14,7 @@ import Journal from './pages/Journal';
 import Login from './pages/Login';
 import MindfulAssistant from './pages/MindfulAssistant';
 import Music from './pages/Music';
+import Profile from './pages/Profile';
 import Questionnaire from './pages/Questionnaire';
 import Signup from './pages/Signup';
 import { useSelector } from 'react-redux';
@@ -37,12 +39,14 @@ function App() {
         <Route path="/music" element={user ? <Music /> : <Navigate to="/login" />} />
         <Route path="/image-analyzer" element={user ? <ImageAnalyzer /> : <Navigate to="/login" />} />
         <Route path="/assistant" element={user ? <MindfulAssistant /> : <Navigate to="/login" />} />
-        <Route path="/encyclopedia" element={user ? <Encyclopedia /> : <Navigate to="/login" />} />  
-        <Route path="/daily-activities" element={user ? <DailyActivities /> : <Navigate to="/login" />} /> 
-        <Route path="/case-history" element={<CaseHistory />} /> {/* Redirect here after 7 Questions */}
+        <Route path="/encyclopedia" element={user ? <Encyclopedia /> : <Navigate to="/login" />} />
+        <Route path="/daily-activities" element={user ? <DailyActivities /> : <Navigate to="/login" />} />
+        <Route path="/case-history" element={<CaseHistory />} />
+        <Route path="/SleepCycleSection" element={<SleepCycleSection />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;

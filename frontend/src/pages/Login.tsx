@@ -1,15 +1,12 @@
 
 
 import React, { useState } from "react";
-import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../hooks/axios/axios";
 import { setUser } from "../redux/slices/userSlice";
-import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
 import { Brain } from "lucide-react";
-import { Link } from "react-router-dom";
 
 const Login = () => {
 	const dispatch = useDispatch();

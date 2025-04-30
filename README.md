@@ -1,133 +1,32 @@
-# 🌙 Mindful AI — Your Complete Companion for Mental Wellness
+# 🧠 Mindful AI — Emotion-Aware Mental Health Assistant
 
-> "A serene space where sleep, mental clarity, creativity, and community come together."
+**Mindful AI** is an intelligent mental wellness companion that combines *Reinforcement Learning*, *natural language understanding*, and *dynamic UX routing* to support users based on their emotional state — in real-time.
 
----
-
-
-
-## 🧠 About Mindful AI
-
-**Mindful AI** is a full-stack AI-powered wellness ecosystem, thoughtfully designed to help individuals improve their mental health through mindfulness, creativity, community, and intelligent self-awareness.
-
-A new kind of digital sanctuary.  
-Not a distraction — but a **sanctuary**. 🌙✨
+<img src="https://img.shields.io/badge/built_with-TypeScript-blue" />
+<img src="https://img.shields.io/badge/AI-powered-LLM+RL-purple" />
+<img src="https://img.shields.io/badge/frontend-TailwindCSS-lightgrey" />
+<img src="https://img.shields.io/badge/status-In_Development-important" />
 
 ---
 
-## 🚀 Core Features
+## 🌟 Key Features
 
-### 💤 Sleep Wellness
-- Smart Sleep Tracking (Daily Scores, Trends)
-- Sleep Stage Deep Dive (Light, Deep, REM analysis)
-- Personalized Sleep Insights ("20% better after a calm day")
-- Breathing exercises linked to sleep patterns
-- Trend graphs with progressive animation
+- 🎭 **Mood Detection**  
+  Parses natural text like “I feel hopeless” or “I’m exhausted” and maps it to core mood labels like `sad`, `anxious`, `burnt_out`, `angry`, etc.
 
-### 📈 Mindful Analytics
-- Sleep Consistency Analysis
-- Weekly Health Summaries
-- Smart Improvement Suggestions
+- 🧠 **Reinforcement Learning (RL)**  
+  Learns over time which activities (music, journaling, breathing) work best for each user's mood and adapts dynamically.
 
-### 🧘 Breathing Exercise Modules
-- Guided sessions (morning, evening)
-- Triggered breathing after low REM detection
-- Mindful breathing sounds integration
+- 💬 **Short-Circuited LLM Support**  
+  Uses an LLM chatbot only if no actionable mood is detected — reducing hallucinations and improving reliability.
 
-### 🎶 Image to Music Relaxation
-- Upload a picture  
-- AI generates calming ambient music based on colors & mood
-- Personalized meditation music
+- 🎯 **RL + Feedback Loop**  
+  Tracks how users respond to suggestions and updates Q-values accordingly. Exploration rate decays automatically for better personalization.
 
-### 🧠 Smart Mindful Chatbot
-- AI-powered personal coach
-- Journaling prompts, breathing suggestions, habit tracking
-
-### 📝 Evaluation Test for Self-Wellness
-- Mindful evaluation quizzes
-- Get feedback on your mental health & wellness
-- Personalized improvement plan
-
-### 📔 Daily Journal
-- Guided mindful journaling
-- Mood tracking over time
-- Reflection suggestions ("What made you smile today?")
-
-### 📚 Encyclopedia of Mindfulness
-- Curated articles on mindfulness, meditation, sleep science
-- AI-summarized mini-encyclopedia
-- Learn new techniques weekly
-
-### 🧹 Mindful Assistant
-- Smart notification system
-- Suggests breathing, reflection, journaling based on your data
-- Reminds you gently to care for yourself
-
-### 💬 Real-Time Community Chat
-- Socket.IO-based real-time messaging
-- Profile uploads
-- Seen Receipts (✓✓)
-- Typing Animation (three dots…)
-- Light/Dark Theme
-- Multi-Room Chat (Mental Health, Random, Productivity)
+- 🪐 **Visual & Engaging UI**  
+  Built with React, TailwindCSS, Vanta.js backgrounds, floating chatbot UI, and animations for a calming user experience.
 
 ---
 
-## 🏗 Tech Stack
+## 🤖 Architecture
 
-| Frontend | Backend | DevOps/Infra | AI/Media |
-|:---------|:--------|:-------------|:---------|
-| Next.js 15 | Node.js (Express) | Netlify (frontend) | OpenAI API |
-| Tailwind CSS | Socket.IO (WebSocket) | Render (backend) | HuggingFace (Image-to-Music models) |
-| Framer Motion | REST APIs | GitHub Actions (CI/CD) | TensorFlow.js (optional) |
-| Recharts (Graphs) | CORS Security | Vercel (optional preview) | |
-| Emoji Picker | Websocket Scaling | | |
-
----
-
-## 📸 UI Preview
-
-> (Insert screenshots:  
-> Sleep Dashboard 🌙,  
-> Community Chat 💬,  
-> Image-to-Music 🎶,  
-> Journal 📔,  
-> Encyclopedia 📚  
-> Mindful Assistant Bot 🤖)
-
----
-
-## 🛤️ Roadmap
-
-- [x] Sleep Tracking MVP
-- [x] Smart Community Chat
-- [x] Breathing Exercises Integration
-- [x] Daily Journaling Module
-- [x] Evaluation Mindful Quiz
-- [x] Encyclopedia Mini-Wiki
-- [ ] OraTech API wearable data integration
-- [ ] Push Notifications (Web & Mobile)
-- [ ] AI Image-to-Music Relaxation Generator
-- [ ] Mindful AI Coach 2.0 (custom GPT fine-tuned)
-- [ ] Premium Breathing Sound Libraries
-- [ ] Meditation Room Live Audio Space
-- [ ] Mobile App Version (Phase 2)
-
----
-
-## 🛠️ Local Development
-
-Want to run it locally?
-
-```bash
-# Clone this repo
-git clone https://github.com/your-username/mindful-ai.git
-
-# Install dependencies
-npm install
-
-# Run frontend
-npm run dev
-
-# (In separate terminal) Run backend
-npm run server

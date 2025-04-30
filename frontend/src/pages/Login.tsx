@@ -1,15 +1,14 @@
 
 
-import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { motion } from "framer-motion";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
-import styles from "../styles/Login.module.css";
+import { toast } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "../hooks/axios/axios";
 import { setUser } from "../redux/slices/userSlice";
-import { useDispatch } from "react-redux";
-import { toast } from "react-hot-toast";
+import styles from "../styles/Login.module.css";
+
+
 
 const Login = () => {
 	const dispatch = useDispatch();
@@ -45,7 +44,6 @@ const Login = () => {
 		<div className={styles.container}>
 			<div className={styles.glassContainer}>
 				<div className={styles.header}>
-					<Brain className={styles.logo} />
 					<h1 className={styles.title}>MINDFUL AI</h1>
 				</div>
 

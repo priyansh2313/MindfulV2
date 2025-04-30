@@ -13,18 +13,22 @@ import {
   Music,
   Smile,
   TrendingUp,
-  Users
+  Users,
 } from "lucide-react";
 import React, { useEffect, useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 import EvaluationGraph from "../pages/EvaluationGraph";
 import FloatingChatbot from "../pages/FloatingChatbot";
 import FloatingLeaves from "../pages/FloatingLeaves";
 import styles from "../styles/Dashboard.module.css";
+import { chooseAction, initQTable } from "../utils/reinforcement";
+
+const qTable = initQTable();
+const mood = localStorage.getItem("todayMood") as any;
 
 
-
-
+// 👇 Add this if VANTA.CLOUDS is available as module
 
 const tips = [
   "Take a 10-minute walk to clear your mind.",
@@ -34,6 +38,25 @@ const tips = [
   "Check in with a friend today.",
 ];
 
+
+
+function interpretMood(emoji: string): 'happy' | 'neutral' | 'sad' | 'anxious' {
+  switch (emoji) {
+    case '😄':
+    case '🙂':
+      return 'happy';
+    case '😐':
+      return 'neutral';
+    case '😕':
+      return 'anxious';
+    case '😢':
+      return 'sad';
+    default:
+      return 'neutral';
+  }
+}
+
+
 const Dashboard = () => {
   const navigate = useNavigate();
   const [showSection, setShowSection] = useState(false);
@@ -41,9 +64,13 @@ const Dashboard = () => {
   const [tip, setTip] = useState(tips[Math.floor(Math.random() * tips.length)]);
   const [progress, setProgress] = useState(0);
   const [moodHistory, setMoodHistory] = useState<string[]>([]);
-  const [showChat, setShowChat] = useState(false); // ✅ moved inside
+  const [showChat, setShowChat] = useState(false);
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
+  const [recommendedContent, setRecommendedContent] = useState<string | null>(null);
 
+
+  // 👇 Vanta setup
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,13 +94,35 @@ const Dashboard = () => {
     }, 20);
   }, []);
 
+
+  
+
   const handleMoodChange = (emoji: string) => {
     setMood(emoji);
     localStorage.setItem("todayMood", emoji);
     const updatedHistory = [...moodHistory, emoji].slice(-5);
     setMoodHistory(updatedHistory);
     localStorage.setItem("moodHistory", JSON.stringify(updatedHistory));
+  
+    // ✅ RL: choose next best action (section)
+    const rlMood = interpretMood(emoji);
+    const content = chooseAction(rlMood, qTable);
+    setRecommendedContent(content);
+  
+    // ✅ Route map based on RL action
+    const redirectMap: Record<string, string> = {
+      music: "/music",
+      quote: "/journal", // assume reflective writing
+      breathing: "/daily-activities",
+      journal_prompt: "/evaluation", // or any suitable page
+    };
+  
+    const path = redirectMap[content];
+    if (path) {
+      navigate(path);
+    }
   };
+  
 
   const refreshTip = () => {
     let newTip = tip;
@@ -84,37 +133,24 @@ const Dashboard = () => {
   };
 
   return (
-    <div className={styles.dashboardContainer}>
+    <div  className={styles.dashboardContainer}>
       <FloatingLeaves />
-      <div className={styles.backgroundOverlay}></div>
       <div className={styles.dashboardPanel}>
         <nav className={styles.dashboardNav}>
           <h1 className={styles.dashboardTitle}>MINDFUL AI</h1>
           <div className={styles.navButtons}>
-    <button
-      onClick={() => navigate("/nearby-professionals")}
-      className={styles.mapButton}
-      title="Find Nearby Professionals"
-    >
-      <MapPin size={20} />
-    </button>
-
-    {/* ⭐ NEW PROFILE BUTTON ⭐ */}
-    <button
-      onClick={() => navigate("/profile")}
-      className={styles.profileButton}
-      title="My Profile"
-    >
-      <Smile size={20} />
-    </button>
-
-    <button onClick={() => navigate("/")} className={styles.logoutButton}>
-      <LogOut className={styles.logoutIcon} /> Logout
-    </button>
-</div>
-
+            <button onClick={() => navigate("/nearby-professionals")} className={styles.mapButton} title="Find Nearby Professionals">
+              <MapPin size={20} />
+            </button>
+            <button onClick={() => navigate("/profile")} className={styles.profileButton} title="My Profile">
+              <Smile size={20} />
+            </button>
+            <button onClick={() => navigate("/")} className={styles.logoutButton}>
+              <LogOut className={styles.logoutIcon} /> Logout
+            </button>
+          </div>
         </nav>
-        
+
         <div className={styles.dashboardGrid}>
           <DashboardCard title="Evaluation Test" description="Take an assessment" icon={<ClipboardCheck className={styles.cardIcon} />} onClick={() => navigate("/evaluation")} onHoverEnter={() => setHoveredSection("Evaluation Test")}
   onHoverLeave={() => setHoveredSection(null)}/>
@@ -145,18 +181,10 @@ const Dashboard = () => {
           transition={{ duration: 1 }}
         >
           <div className={styles.scrollPanel}>
-            <img
-              src="https://source.unsplash.com/featured/?happy,person"
-              alt="Mental Health Support"
-              className={styles.scrollImage}
-            />
+            <img src="https://source.unsplash.com/featured/?happy,person" alt="Mental Health Support" className={styles.scrollImage} />
             <div className={styles.scrollContent}>
-              <h2 className={styles.scrollTitle}>
-                Mental Health, <span className={styles.highlight}>Redefined</span>
-              </h2>
-              <p className={styles.scrollDescription}>
-                Your mental health matters. Access support anytime, anywhere.
-              </p>
+              <h2 className={styles.scrollTitle}>Mental Health, <span className={styles.highlight}>Redefined</span></h2>
+              <p className={styles.scrollDescription}>Your mental health matters. Access support anytime, anywhere.</p>
               <button className={styles.ctaButton}>Learn More</button>
             </div>
           </div>
@@ -165,14 +193,13 @@ const Dashboard = () => {
 
       <div className={styles.analyticsSection}>
         <h2 className={styles.analyticsHeading}>Your Analytics</h2>
-
         {localStorage.getItem("evaluationScore") && (
           <div className={styles.graphContainer}>
             <EvaluationGraph />
           </div>
         )}
 
-        <div className={styles.dashboardWidgets}>
+<div className={styles.dashboardWidgets}>
           <div className={styles.widgetCard}>
             <div className={styles.widgetHeader}><Smile /> Mood Tracker</div>
             <div className={styles.moodOptions}>
@@ -219,46 +246,26 @@ const Dashboard = () => {
         </div>
       </div>
 
-
-      
-
-
-      {/* ✅ Floating chatbot now handled correctly */}
       <FloatingChatbot
-  isOpen={showChat}
-  onToggle={() => setShowChat((prev) => !prev)}
-  hoveredSection={hoveredSection}
-/>
-
+        isOpen={showChat}
+        onToggle={() => setShowChat((prev) => !prev)}
+        hoveredSection={hoveredSection}
+        source="dashboard"
+      />
     </div>
   );
 };
 
 const DashboardCard = ({ title, description, icon, onClick, onHoverEnter, onHoverLeave }) => (
-  <div
-    onClick={onClick}
-    onMouseEnter={onHoverEnter}
-    onMouseLeave={onHoverLeave}
-    className={styles.dashboardCard}
-  >
+  <div onClick={onClick} onMouseEnter={onHoverEnter} onMouseLeave={onHoverLeave} className={styles.dashboardCard}>
     <div className={styles.cardContent}>
       <div className={styles.iconContainer}>{icon}</div>
       <div className={styles.cardText}>
         <h3 className={styles.cardTitle}>{title}</h3>
         <p className={styles.cardDescription}>{description}</p>
       </div>
-      
     </div>
-    
   </div>
-  
 );
-
-
-
-
-
-
-
 
 export default Dashboard;

@@ -1,119 +1,126 @@
-import { ArrowLeft, Pause, Play, SkipBack, SkipForward, Volume2, VolumeX } from "lucide-react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import YouTube from "react-youtube";
-import styles from "../styles/Music.module.css";
+// src/pages/MusicDashboard.tsx
 
-interface Track {
-  title: string;
-  artist: string;
-  videoId: string;
-  cover: string;
-}
+import React, { useState } from 'react';
+import styles from '../styles/Music.module.css';
+import MusicPlayer from './MusicPlayer';
 
-const tracks: Track[] = [
+const playlists = [
   {
     title: "Peaceful Rain",
-    artist: "Nature Sounds",
-    videoId: "V1RPi2MYptM", // YouTube Video ID
-    cover: "/assets/rain.jpg",
+    cover: "./images/peacefulrain.jpg",
+    videoId: "V1RPi2MYptM", // working
+    mood: "Relax"
   },
+
+  
   {
     title: "Ocean Waves",
-    artist: "Nature Sounds",
-    videoId: "DLvfqAdwwFs",
-    cover: "/assets/ocean.jpg",
+    cover: "./images/seawaves.jpg",
+
+    videoId: "v=N2p-5LPnsJMn",
+    mood: "Calm"
   },
   {
-    title: "Meditation Bell",
-    artist: "Zen Music",
-    videoId: "Q5dU6serXkg",
-    cover: "/assets/meditation.jpg",
+    title: "Zen Bell",
+    cover: "./images/zenbowl.jpg",
+    videoId: "s8EgcH9gCkQ", // ✅ Tibetan bells meditation
+    mood: "Focus"
   },
+  {
+    title: "Morning Birds",
+    cover: "./images/birds.jpg",
+    videoId: "QCw0L6FupQ0", // ✅ Morning birds peaceful sounds
+    mood: "Awaken"
+  },
+  {
+    title: "Mountain Wind",
+    cover: "./images/wind.jpg",
+    videoId: "lD_FvL-Fb0M", // ✅ Wind sounds for relaxation
+    mood: "Breeze"
+  },
+  {
+    title: "Tibetan Bowl",
+    cover: "/assets/tibetan.jpg",
+    videoId: "WWcxeI3uZxI", // ✅ Tibetan singing bowls
+    mood: "Meditate"
+  },
+  {
+    title: "Deep Forest",
+    cover: "./images/deepforest.jpg",
+    videoId: "1ZYbU82GVz4", // ✅ Deep forest ambient sounds
+    mood: "Nature"
+  },
+  {
+    title: "Crackling Fire",
+    cover: "/assets/fire.jpg",
+    videoId: "eyU3bRy2x44", // ✅ Fireplace crackling sounds
+    mood: "Warmth"
+  },
+  {
+    title: "Night Crickets",
+    cover: "/assets/crickets.jpg",
+    videoId: "7oEEL8h9bms", // ✅ Night cricket sounds
+    mood: "Sleep"
+  },
+  {
+    title: "River Flow",
+    cover: "/assets/river.jpg",
+    videoId: "uItjZ_pj4eQ", // ✅ River flowing peacefully
+    mood: "Flow"
+  }
 ];
 
-const Music = () => {
-  const navigate = useNavigate();
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
-  const [player, setPlayer] = useState<any>(null);
 
-  const handlePlayPause = () => {
-    if (player) {
-      if (isPlaying) {
-        player.pauseVideo();
-      } else {
-        player.playVideo();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-
-  const handleSkip = (direction: "next" | "prev") => {
-    let newIndex = direction === "next" ? currentTrackIndex + 1 : currentTrackIndex - 1;
-    if (newIndex < 0) newIndex = tracks.length - 1;
-    if (newIndex >= tracks.length) newIndex = 0;
-    setCurrentTrackIndex(newIndex);
-    player?.loadVideoById(tracks[newIndex].videoId);
-  };
+export default function MusicDashboard() {
+  const [selectedTrack, setSelectedTrack] = useState(playlists[0]);
 
   return (
-    <div className={styles.container} style={{ backgroundImage: `url(${tracks[currentTrackIndex].cover})` }}>
-      {/* Back Button */}
-      <button onClick={() => navigate("/dashboard")} className={styles.backButton}>
-        <ArrowLeft className="h-5 w-5 mr-2" /> Back
-      </button>
+    <div className={styles.dashboardContainer}>
+      {/* Sidebar */}
+      <aside className={styles.sidebar}>
+        <h2>🎧 Calm Library</h2>
+        <ul>
+          {playlists.map((item, index) => (
+            <li
+              key={index}
+              className={`${styles.playlistItem} ${item.title === selectedTrack.title ? styles.active : ''}`}
+              onClick={() => setSelectedTrack(item)}
+            >
+              <img src={item.cover} alt={item.title} />
+              <div>
+                <strong>{item.title}</strong>
+                <p>{item.mood}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </aside>
 
-      {/* Music Player UI */}
-      <div className={styles.player}>
-        <div className={styles.glow}></div>
-        <img src={tracks[currentTrackIndex].cover} alt="Album Cover" className={styles.albumCover} />
-        <h2 className={styles.trackTitle}>{tracks[currentTrackIndex].title}</h2>
-        <p className={styles.trackArtist}>{tracks[currentTrackIndex].artist}</p>
-
-        {/* Controls */}
-        <div className={styles.controls}>
-          <button onClick={() => handleSkip("prev")} className={styles.controlButton}>
-            <SkipBack className="h-6 w-6" />
-          </button>
-
-          <button onClick={handlePlayPause} className={styles.controlButton}>
-            {isPlaying ? <Pause className="h-8 w-8" /> : <Play className="h-8 w-8" />}
-          </button>
-
-          <button onClick={() => handleSkip("next")} className={styles.controlButton}>
-            <SkipForward className="h-6 w-6" />
-          </button>
-
-          <button onClick={() => setIsMuted(!isMuted)} className={styles.controlButton}>
-            {isMuted ? <VolumeX className="h-6 w-6" /> : <Volume2 className="h-6 w-6" />}
-          </button>
+      {/* Main Content */}
+      <main className={styles.mainContent}>
+        <div className={styles.header}>
+          <h1>Made for You</h1>
+          <p>Select a soundscape and let your mind relax</p>
         </div>
+        <div className={styles.feedGrid}>
+          {playlists.map((item, index) => (
+            <div
+              key={index}
+              className={styles.feedCard}
+              onClick={() => setSelectedTrack(item)}
+            >
+              <img src={item.cover} alt={item.title} />
+              <h3>{item.title}</h3>
+              <p>{item.mood}</p>
+            </div>
+          ))}
+        </div>
+      </main>
 
-        {/* Hidden YouTube Player (Audio Only) */}
-        <YouTube
-          videoId={tracks[currentTrackIndex].videoId}
-          opts={{
-            height: "0",
-            width: "0",
-            playerVars: {
-              autoplay: 1,
-              controls: 0,
-              modestbranding: 1,
-              showinfo: 0,
-              loop: 1,
-              rel: 0,
-            },
-          }}
-          onReady={(event) => {
-            setPlayer(event.target);
-            event.target.setVolume(isMuted ? 0 : 100);
-          }}
-        />
-      </div>
+      {/* Now Playing */}
+      <aside className={styles.nowPlaying}>
+        <MusicPlayer track={selectedTrack} />
+      </aside>
     </div>
   );
-};
-
-export default Music;
+}

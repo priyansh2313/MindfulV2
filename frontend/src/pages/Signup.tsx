@@ -40,6 +40,7 @@ const Signup = () => {
 			.then(({ data }) => {
 				console.log(data);
 				toast.success("Account created successfully!")
+				localStorage.setItem("user", JSON.stringify(data.data));
 				dispatch(setUser(data.data)); 
 				navigate("/dashboard");
 			})

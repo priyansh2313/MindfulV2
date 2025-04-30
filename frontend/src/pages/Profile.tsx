@@ -1,30 +1,21 @@
-import axios from 'axios';
+import axios from '../hooks/axios/axios';
 import { useEffect, useState } from 'react';
 import styles from "../styles/Profile.module.css"; // Using your new module CSS
+import { useSelector } from 'react-redux';
 
 export default function Profile() {
-  const [profile, setProfile] = useState({
-    name: '',
-    age: '',
-    profession: '',
-    bio: '',
-    preferences: {
-      theme: 'light',
-    },
-  });
+  const [profile, setProfile] = useState({});
 
   const [loading, setLoading] = useState(true);
   const [saved, setSaved] = useState(false);
-  const email = localStorage.getItem('userEmail'); // assuming you saved it after login
+  const user = useSelector((state : any) => state.user.user);
 
   useEffect(() => {
-    if (email) {
-      axios.get(`/api/profile?email=${email}`)
-        .then(res => setProfile(res.data))
+      axios.get(`/users/profile/${user._id}`)
+        .then(({data}) => setProfile(data.data))
         .catch(err => console.error(err))
         .finally(() => setLoading(false));
-    }
-  }, [email]);
+  }, [user]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -37,7 +28,7 @@ export default function Profile() {
   const handleSubmit = async () => {
     try {
       setSaved(false);
-      await axios.put('/api/profile', { email, ...profile });
+      await axios.put(`/users/update/${user._id}`, { ...profile });
       setSaved(true);
       setTimeout(() => setSaved(false), 3000); // Hide success after 3 seconds
     } catch (error) {
@@ -65,13 +56,30 @@ export default function Profile() {
         placeholder="Your Name"
         className={styles.inputField}
       />
+      <input
+        type="phone"
+        name="phone"
+        value={profile.phone}
+        onChange={handleChange}
+        placeholder="Your Phone"
+        className={styles.inputField}
+      />
+      <input
+        type="email"
+        name="email"
+        value={profile.email}
+        onChange={handleChange}
+        placeholder="Your Email"
+        className={styles.inputField}
+      />
+
+      
 
       <input
-        type="number"
-        name="age"
-        value={profile.age}
+        type="date"
+        name="dob"
+        value={profile.dob.split("T")[0]}
         onChange={handleChange}
-        placeholder="Your Age"
         className={styles.inputField}
       />
 

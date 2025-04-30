@@ -10,6 +10,8 @@ import axios from "../hooks/axios/axios";
 import { setUser } from "../redux/slices/userSlice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
+import { Brain } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
 	const dispatch = useDispatch();
@@ -26,7 +28,8 @@ const Login = () => {
 		axios
 			.post("/users/login", { email, password }, {withCredentials: true})
 			.then(({ data }) => {
-				console.log(data);
+				console.log(data.data);
+				localStorage.setItem("user", JSON.stringify(data.data));
 				dispatch(setUser(data.data));
 				toast.success("Login successful!");
 				navigate("/dashboard");

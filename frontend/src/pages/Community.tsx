@@ -10,12 +10,15 @@ declare module "emoji-picker-react";
 import { useSelector } from "react-redux";
 
 // const socket = io("https://mindful-chat-server.onrender.com");
-const socket = io("http://localhost:3000", { withCredentials: true });
+const socket = io("https://mindful-chat-server.onrender.com", { withCredentials: true });
+// const socket = io("http://localhost:3000", { withCredentials: true });
 
 const colors = ["#F06292", "#64B5F6", "#81C784", "#FFD54F", "#BA68C8"];
 
 export default function CommunityChat() {
-  const [username, setUsername] = useState("");
+  const user = useSelector((state : any) => state.user.user)
+  console.log(user)
+  const [username, setUsername] = useState(user.anonymousUsername);
   const [loginName, setLoginName] = useState(""); // live input for name
   const [profilePicUrl, setProfilePicUrl] = useState<string | null>(null);
   const [profilePicFile, setProfilePicFile] = useState<File | null>(null);
@@ -42,7 +45,16 @@ export default function CommunityChat() {
 
     socket.emit("userJoined", { username, room: currentRoom });
 
+    socket.on("previousMessages", ({ messages, room }) => {
+      console.log(messages);
+      if (room === currentRoom) {
+        // setMessages(messages.map((msg: any) => ({ ...msg, id: uuidv4() })));
+        setMessages(messages);
+      }
+    });
+
     socket.on("receiveMessage", (data) => {
+      console.log(data);
       if (data.room === currentRoom) {
         setMessages((prev) => [...prev, { ...data, id: uuidv4() }]);
       }
@@ -79,12 +91,14 @@ export default function CommunityChat() {
 
   const sendMessage = () => {
     if (input.trim()) {
+      console.log(input);
       socket.emit("sendMessage", {
         username,
         message: input,
         room: currentRoom,
         profilePicUrl,
         timestamp: new Date().toISOString(),
+        senderId: user._id,
       });
       setInput("");
     }

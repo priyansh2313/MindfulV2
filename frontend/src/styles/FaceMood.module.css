@@ -1,78 +1,78 @@
+/* FaceMood.module.css */
+
+/* Wrapper for video + overlay */
 .wrapper {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  max-width: 420px;
+  width: 320px;
+  height: 260px;
   margin: 0 auto;
-  border-radius: 24px;
-  background: linear-gradient(135deg, #1f1c2c, #928dab);
-  overflow: hidden;
-  padding: 20px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
-  transition: all 0.3s ease-in-out;
+  background: linear-gradient(135deg, #d1d8ff, #b6f2e4);
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  animation: backgroundBreath 10s ease-in-out infinite;
 }
 
+/* Breathing background animation */
+@keyframes backgroundBreath {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Video feed */
 .video {
   width: 100%;
-  height: auto;
-  border-radius: 24px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
-  filter: contrast(1.1) brightness(1.05);
+  height: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+  border: 4px solid transparent;
+  animation: videoGlow 3s ease-in-out infinite;
 }
 
-.moodFloatingBox {
-  position: absolute;
-  top: -70px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.7);
-  padding: 16px 28px;
-  border-radius: 20px;
-  text-align: center;
-  min-width: 220px;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
-  animation: slideFadeIn 0.5s ease-out;
-  backdrop-filter: blur(14px);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  z-index: 100;
-}
-
-.emoji {
-  font-size: 2.8rem;
-  display: block;
-  animation: pulseEmoji 1.6s infinite;
-}
-
-.moodText {
-  margin-top: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #c8e6ff;
-  letter-spacing: 0.7px;
-  text-transform: capitalize;
-}
-
-@keyframes slideFadeIn {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-}
-
-@keyframes pulseEmoji {
+/* Animated glowing border */
+@keyframes videoGlow {
   0%, 100% {
-    transform: scale(1);
+    border-color: #a5b4fc;
+    box-shadow: 0 0 15px #a5b4fc;
   }
   50% {
-    transform: scale(1.15);
+    border-color: #6ee7b7;
+    box-shadow: 0 0 25px #6ee7b7;
+  }
+}
+
+/* Centered "Analyzing..." text */
+.moodOverlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* Only analyzing text */
+.moodText {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #374151;
+  margin-top: 0.5rem;
+  animation: fadeInOut 3s infinite;
+}
+
+/* Breathing text effect */
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Responsive for mobile */
+@media (max-width: 480px) {
+  .wrapper {
+    width: 90%;
+    height: auto;
+  }
+
+  .moodText {
+    font-size: 1.2rem;
   }
 }

@@ -1,10 +1,8 @@
-// src/components/TextSentiment.tsx
 import React, { useState } from "react";
 import styles from "../styles/TextSentiment.module.css";
 
 const TextSentiment = ({ onMoodDetected }: { onMoodDetected: (mood: string) => void }) => {
   const [text, setText] = useState("");
-  const [sentiment, setSentiment] = useState<string | null>(null);
 
   const analyzeSentiment = (input: string): string => {
     const lower = input.toLowerCase();
@@ -16,14 +14,8 @@ const TextSentiment = ({ onMoodDetected }: { onMoodDetected: (mood: string) => v
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const mood = analyzeSentiment(text);
-    setSentiment(mood);
-    onMoodDetected(mood);
-  };
-
-  const emojiMap = {
-    happy: "😊",
-    sad: "😢",
-    neutral: "😐",
+    onMoodDetected(mood); // ✅ Only inform parent
+    setText(""); // Optional: clear text after submit
   };
 
   return (
@@ -46,12 +38,9 @@ const TextSentiment = ({ onMoodDetected }: { onMoodDetected: (mood: string) => v
         </div>
       </form>
 
-      {sentiment && (
-        <div className={`${styles.resultBadge} ${styles[sentiment]}`}>
-          <span className={styles.emoji}>{emojiMap[sentiment]}</span>
-          <p>You seem to be feeling <strong>{sentiment}</strong></p>
-        </div>
-      )}
+      {/* ✅ Remove showing result */}
+      {/* Just keep typing experience clean */}
+      <p className={styles.analyzingText}>🧠 Analyzing your thoughts...</p> 
     </div>
   );
 };

@@ -1,70 +1,145 @@
 /* VoiceWaveformMic.module.css */
 
+/* Container Layout */
 .voiceContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  background: linear-gradient(to right, #f8fafc, #eef2ff);
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to right, #f9fafb, #eef2ff);
+  padding: 2.5rem;
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 500px;
+  max-width: 460px;
   margin: auto;
   text-align: center;
+  animation: containerFloat 10s ease-in-out infinite;
 }
 
-.title {
-  font-size: 1.5rem;
+/* Smooth container floating */
+@keyframes containerFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Title */
+.heading {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 2rem;
+  background: linear-gradient(90deg, #6366f1, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Mic Button */
+.micButton {
+  width: 90px;
+  height: 90px;
+  background: linear-gradient(135deg, #6366f1, #7c3aed);
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+  animation: micPulse 2s infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 1.5rem 0;
+}
+
+.micButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 30px rgba(124, 58, 237, 0.5);
+}
+
+/* Mic breathing */
+@keyframes micPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
+  50% { box-shadow: 0 0 35px rgba(124, 58, 237, 0.6); }
+}
+
+/* Listening section */
+.listeningSection {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeInOut 3s infinite;
+}
+
+/* Listening breathing text */
+.listeningText {
+  font-size: 1.3rem;
   font-weight: 600;
   color: #374151;
   margin-bottom: 1rem;
 }
 
-.micButton {
-  background: radial-gradient(circle, #6366f1 0%, #7c3aed 100%);
-  color: white;
-  border: none;
-  width: 80px;
-  height: 80px;
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Wave animation circle */
+.wave {
+  width: 50px;
+  height: 50px;
+  background: rgba(99, 102, 241, 0.2);
   border-radius: 50%;
-  font-size: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  margin: 1.5rem auto;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
-  animation: pulseGlow 2s infinite;
+  animation: pulseWave 2s infinite ease-in-out;
 }
 
-.micButton:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 25px rgba(124, 58, 237, 0.8);
+@keyframes pulseWave {
+  0% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.5); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.5; }
 }
 
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 12px rgba(99, 102, 241, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 24px rgba(99, 102, 241, 0.8);
-  }
+/* Canvas for real waveform (optional) */
+.canvas {
+  width: 100%;
+  height: 120px;
+  background: #e0e7ff;
+  border-radius: 18px;
+  margin-top: 2rem;
 }
 
+/* Status text */
 .status {
   font-size: 1rem;
-  color: #475569;
-  margin-top: 0.5rem;
+  color: #64748b;
+  margin-top: 1rem;
   font-style: italic;
 }
 
-.canvas {
-  width: 100%;
-  height: 100px;
-  background: #e0e7ff;
-  border-radius: 12px;
-  margin-top: 1rem;
+/* Responsive Tweaks */
+@media (max-width: 480px) {
+  .voiceContainer {
+    padding: 1.5rem;
+  }
+
+  .heading {
+    font-size: 1.5rem;
+  }
+
+  .micButton {
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
+  }
+
+  .listeningText {
+    font-size: 1.1rem;
+  }
+
+  .wave {
+    width: 40px;
+    height: 40px;
+  }
 }

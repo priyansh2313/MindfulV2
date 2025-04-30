@@ -1,109 +1,68 @@
-// src/components/VoiceWaveformMic.tsx
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/VoiceSentiment.module.css";
 
-const VoiceWaveformMic = ({ onMoodDetected }: { onMoodDetected: (mood: string) => void }) => {
-  const [recording, setRecording] = useState(false);
-  const [status, setStatus] = useState("Idle");
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const analyserRef = useRef<AnalyserNode | null>(null);
-  const dataArrayRef = useRef<Uint8Array | null>(null);
-  const audioContextRef = useRef<AudioContext | null>(null);
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const chunksRef = useRef<Blob[]>([]);
+// Extend the Window interface to include SpeechRecognition
+interface Window {
+  SpeechRecognition: any;
+  webkitSpeechRecognition: any;
+}
 
-  const drawWaveform = () => {
-    const canvas = canvasRef.current;
-    const ctx = canvas?.getContext("2d");
-    if (!canvas || !ctx || !analyserRef.current || !dataArrayRef.current) return;
+const VoiceSentiment = ({ onMoodDetected }: { onMoodDetected: (mood: string) => void }) => {
+  const [isListening, setIsListening] = useState(false);
+  const [transcript, setTranscript] = useState("");
 
-    const draw = () => {
-      requestAnimationFrame(draw);
-      analyserRef.current?.getByteTimeDomainData(dataArrayRef.current!);
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+  useEffect(() => {
+    if (!isListening) return;
 
-      ctx.beginPath();
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = "#7c3aed";
+    const recognition = new (window.SpeechRecognition || (window as any).webkitSpeechRecognition)();
+    recognition.lang = "en-US";
+    recognition.continuous = false;
+    recognition.interimResults = false;
 
-      const sliceWidth = canvas.width / dataArrayRef.current.length;
-      let x = 0;
-      for (let i = 0; i < dataArrayRef.current.length; i++) {
-        const v = dataArrayRef.current[i] / 128.0;
-        const y = (v * canvas.height) / 2;
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
+      const speechToText = event.results[0][0].transcript;
+      setTranscript(speechToText);
 
-        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-        x += sliceWidth;
-      }
-      ctx.stroke();
+      const mood = analyzeSpeechMood(speechToText);
+      onMoodDetected(mood); // ✅ Only send mood to parent
     };
-    draw();
-  };
 
-  const startRecording = async () => {
-    setStatus("Recording...");
-    setRecording(true);
-    audioContextRef.current = new AudioContext();
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    recognition.onerror = (event) => {
+      console.error("Speech recognition error", event.error);
+    };
 
-    const source = audioContextRef.current.createMediaStreamSource(stream);
-    const analyser = audioContextRef.current.createAnalyser();
-    analyser.fftSize = 2048;
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
+    recognition.start();
 
-    source.connect(analyser);
-    analyserRef.current = analyser;
-    dataArrayRef.current = dataArray;
+    return () => recognition.abort();
+  }, [isListening, onMoodDetected]);
 
-    drawWaveform();
-
-    const recorder = new MediaRecorder(stream);
-    recorder.ondataavailable = (e) => chunksRef.current.push(e.data);
-    recorder.onstop = handleStop;
-    recorder.start();
-    mediaRecorderRef.current = recorder;
-  };
-
-  const stopRecording = () => {
-    setRecording(false);
-    setStatus("Analyzing...");
-    mediaRecorderRef.current?.stop();
-  };
-
-  const handleStop = async () => {
-    const blob = new Blob(chunksRef.current, { type: "audio/webm" });
-    chunksRef.current = [];
-    const mood = await analyzeAudioHeuristically(blob);
-    setStatus(`Detected: ${mood}`);
-    onMoodDetected(mood);
-  };
-
-  const analyzeAudioHeuristically = async (blob: Blob): Promise<string> => {
-    const audioCtx = new AudioContext();
-    const buffer = await blob.arrayBuffer();
-    const audioBuffer = await audioCtx.decodeAudioData(buffer);
-    const rawData = audioBuffer.getChannelData(0);
-    const rms = Math.sqrt(rawData.reduce((acc, v) => acc + v * v, 0) / rawData.length);
-
-    if (rms > 0.05) return "anxious";
-    if (rms < 0.015) return "calm";
+  const analyzeSpeechMood = (input: string): string => {
+    const lower = input.toLowerCase();
+    if (/(sad|tired|upset|depressed|angry|bad|hate)/.test(lower)) return "sad";
+    if (/(happy|grateful|love|joy|peace|calm)/.test(lower)) return "happy";
     return "neutral";
   };
 
+  const handleStartListening = () => {
+    setIsListening(true);
+  };
+
   return (
-    <div className={styles.voiceContainer}>
-      <h3>🎙 Voice Check</h3>
-      <p className={styles.status}>{status}</p>
-      <canvas ref={canvasRef} className={styles.waveform}></canvas>
-      <button
-        className={`${styles.micButton} ${recording ? styles.recording : ""}`}
-        onClick={recording ? stopRecording : startRecording}
-      >
-        <span role="img" aria-label="mic">🎤</span>
-      </button>
+    <div className={styles.voiceWrapper}>
+      <h3 className={styles.heading}>🎤 Speak your feelings aloud</h3>
+
+      {!isListening ? (
+        <button onClick={handleStartListening} className={styles.listenBtn}>
+          🎙️ Start Listening
+        </button>
+      ) : (
+        <div className={styles.listeningSection}>
+          <p className={styles.listeningText}>🎧 Listening to your voice...</p>
+          <div className={styles.wave}></div> {/* optional animation */}
+        </div>
+      )}
     </div>
   );
 };
 
-export default VoiceWaveformMic;
+export default VoiceSentiment;

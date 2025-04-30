@@ -97,3 +97,18 @@
   from { transform: scale(0.95); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
+
+
+
+.analyzingText {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #374151;
+  text-align: center;
+  animation: fadeInOut 3s infinite;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}

@@ -2,7 +2,9 @@
 
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
+import FloatingChatbot from "../pages/FloatingChatbot"; // ✅ Import FloatingChatbot
 import styles from "../styles/DailyActivities.module.css";
+
 
 const breathingExercises = [
   {
@@ -39,6 +41,8 @@ export default function DailyActivities() {
   const [isBreathing, setIsBreathing] = useState(false);
   const [affirmationIndex, setAffirmationIndex] = useState(0);
   const [gratitude, setGratitude] = useState("");
+  const [chatbotOpen, setChatbotOpen] = useState(true); // ✅ Added for chatbot open/close
+
 
   useEffect(() => {
     if (!isBreathing) return;
@@ -63,9 +67,19 @@ export default function DailyActivities() {
 
   return (
     <div className={styles.wrapper}>
-      <motion.h1 className={styles.title} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
-        🧘 Daily Mindfulness
-      </motion.h1>
+      {/* 🧘 Floating Chatbot for Mindful Guidance */}
+      <FloatingChatbot
+        isOpen={chatbotOpen}
+        onToggle={() => setChatbotOpen((prev) => !prev)}
+        hoveredSection={null}
+        mode="exercise" // ✅ Important: mode is "exercise"
+      />
+
+
+
+    <motion.h1 className={styles.title} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
+      🧘 Daily Mindfulness
+    </motion.h1>
 
       <motion.div
         className={styles.breathingCircle}

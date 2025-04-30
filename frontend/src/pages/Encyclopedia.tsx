@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { Moon, Search, Sun } from "lucide-react";
+import { Search } from "lucide-react";
 import React, { useState } from "react";
-import styles from "../styles/Encyclopedia.module.css"; // Importing CSS module
+import styles from "../styles/Encyclopedia.module.css";
+import FloatingChatbot from "./FloatingChatbot";
 
 const disorders = [
   {
@@ -98,27 +99,28 @@ const disorders = [
 ];
 
 
+
 const Encyclopedia = () => {
   const [search, setSearch] = useState("");
   const [darkMode, setDarkMode] = useState(false);
+  const [chatbotOpen, setChatbotOpen] = useState(false);
 
   const filteredDisorders = disorders.filter((d) =>
     d.name.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
-    <div className={`${styles.container} ${darkMode ? styles.dark : styles.light}`}>
-      <div className={styles.wrapper}>
-        {/* Header */}
-        <div className={styles.header}>
-          <h1 className={styles.title}>📚 Mental Health Encyclopedia</h1>
-          <button onClick={() => setDarkMode(!darkMode)} className={styles.themeToggle}>
-            {darkMode ? <Sun className={styles.icon} /> : <Moon className={styles.icon} />}
-          </button>
-        </div>
+    <>
+      <FloatingChatbot
+        isOpen={chatbotOpen}
+        onToggle={() => setChatbotOpen((prev) => !prev)}
+        hoveredSection={"encyclopedia"}
+        mode="encyclopedia"
+      />
 
+      <div className={styles.wrapper}>
         {/* Search Bar */}
-        <motion.div 
+        <motion.div
           className={styles.searchContainer}
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -139,32 +141,31 @@ const Encyclopedia = () => {
           {filteredDisorders.length > 0 ? (
             filteredDisorders.map((disorder, index) => (
               <motion.div
-              key={index}
-              className={styles.card}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
-            >
-              <img src={disorder.image} alt={disorder.name} className={styles.cardImage} />
-              <h2 className={styles.cardTitle}>{disorder.name}</h2>
-              <p className={styles.description}>{disorder.description}</p>
-              <h3 className={styles.sectionTitle}>Symptoms:</h3>
-              <ul className={styles.list}>
-                {disorder.symptoms.map((symptom, i) => (
-                  <li key={i}>{symptom}</li>
-                ))}
-              </ul>
-              <h3 className={styles.sectionTitle}>Treatment:</h3>
-              <p className={styles.description}>{disorder.treatment}</p>
-            </motion.div>
-            
+                key={index}
+                className={styles.card}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+              >
+                <img src={disorder.image} alt={disorder.name} className={styles.cardImage} />
+                <h2 className={styles.cardTitle}>{disorder.name}</h2>
+                <p className={styles.description}>{disorder.description}</p>
+                <h3 className={styles.sectionTitle}>Symptoms:</h3>
+                <ul className={styles.list}>
+                  {disorder.symptoms.map((symptom, i) => (
+                    <li key={i}>{symptom}</li>
+                  ))}
+                </ul>
+                <h3 className={styles.sectionTitle}>Treatment:</h3>
+                <p className={styles.description}>{disorder.treatment}</p>
+              </motion.div>
             ))
           ) : (
             <p className={styles.noResults}>No disorders found.</p>
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -57,7 +57,7 @@ const Questionnaire = () => {
       setSubmitted(true);
 
       setTimeout(() => {
-        navigate("/case-history");
+        navigate("/login");
       }, 2000);
     } catch (error) {
       console.error("Email sending failed:", error);

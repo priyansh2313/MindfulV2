@@ -42,7 +42,7 @@ const Signup = () => {
 				toast.success("Account created successfully!")
 				localStorage.setItem("user", JSON.stringify(data.data));
 				dispatch(setUser(data.data)); 
-				navigate("/dashboard");
+				navigate("/case-history");
 			})
 			.catch((error: any) => {
 				setError("Signup failed!");

@@ -1,30 +1,15 @@
-// ✅ DailyActivities.tsx (Final polished version)
+// ✅ DailyActivities.tsx
 
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import FloatingChatbot from "../pages/FloatingChatbot"; // ✅ Import FloatingChatbot
+import FloatingChatbot from "../pages/FloatingChatbot";
 import styles from "../styles/DailyActivities.module.css";
-
+import { logFeedback, Mood } from "../utils/reinforcement";
 
 const breathingExercises = [
-  {
-    id: 1,
-    activity: "Box Breathing",
-    pattern: [4, 4, 4, 4],
-    phases: ["Inhale", "Hold", "Exhale", "Hold"],
-  },
-  {
-    id: 2,
-    activity: "4-7-8 Breathing",
-    pattern: [4, 7, 8],
-    phases: ["Inhale", "Hold", "Exhale"],
-  },
-  {
-    id: 3,
-    activity: "Alternate Nostril Breathing",
-    pattern: [4, 4, 4, 4],
-    phases: ["Inhale Left", "Hold", "Exhale Right", "Hold"],
-  },
+  { id: 1, activity: "Box Breathing", pattern: [4, 4, 4, 4], phases: ["Inhale", "Hold", "Exhale", "Hold"] },
+  { id: 2, activity: "4-7-8 Breathing", pattern: [4, 7, 8], phases: ["Inhale", "Hold", "Exhale"] },
+  { id: 3, activity: "Alternate Nostril Breathing", pattern: [4, 4, 4, 4], phases: ["Inhale Left", "Hold", "Exhale Right", "Hold"] }
 ];
 
 const affirmations = [
@@ -34,6 +19,8 @@ const affirmations = [
   "I am present in this moment.",
 ];
 
+const moods: Mood[] = ['happy', 'neutral', 'sad', 'anxious', 'angry', 'burnt_out'];
+
 export default function DailyActivities() {
   const [currentExercise, setCurrentExercise] = useState(breathingExercises[0]);
   const [phaseIndex, setPhaseIndex] = useState(0);
@@ -41,8 +28,19 @@ export default function DailyActivities() {
   const [isBreathing, setIsBreathing] = useState(false);
   const [affirmationIndex, setAffirmationIndex] = useState(0);
   const [gratitude, setGratitude] = useState("");
-  const [chatbotOpen, setChatbotOpen] = useState(true); // ✅ Added for chatbot open/close
+  const [chatbotOpen, setChatbotOpen] = useState(true);
+  const [cameFromRL, setCameFromRL] = useState(false);
+  const [feedbackGiven, setFeedbackGiven] = useState(false);
 
+  const storedMood = localStorage.getItem("todayMood") || "unknown";
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const source = localStorage.getItem("rl_action_source");
+      if (source === "daily-activities") setCameFromRL(true);
+    }, 100);
+    return () => clearTimeout(timeout);
+  }, []);
 
   useEffect(() => {
     if (!isBreathing) return;
@@ -67,19 +65,16 @@ export default function DailyActivities() {
 
   return (
     <div className={styles.wrapper}>
-      {/* 🧘 Floating Chatbot for Mindful Guidance */}
       <FloatingChatbot
         isOpen={chatbotOpen}
         onToggle={() => setChatbotOpen((prev) => !prev)}
         hoveredSection={null}
-        mode="exercise" // ✅ Important: mode is "exercise"
+        mode="exercise"
       />
 
-
-
-    <motion.h1 className={styles.title} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
-      🧘 Daily Mindfulness
-    </motion.h1>
+      <motion.h1 className={styles.title} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
+        🧘 Daily Mindfulness
+      </motion.h1>
 
       <motion.div
         className={styles.breathingCircle}
@@ -133,6 +128,27 @@ export default function DailyActivities() {
           </p>
         )}
       </motion.div>
+
+      {!feedbackGiven && (
+  <div>
+    <p>🧘 Was this helpful?</p>
+    <button onClick={() => {
+      const mood = (localStorage.getItem("todayMood") || "unknown") as Mood;
+      logFeedback(mood, "daily-activities", 1);
+      setFeedbackGiven(true);
+    }}>
+      Yes
+    </button>
+    <button onClick={() => {
+      const mood = (localStorage.getItem("todayMood") || "unknown") as Mood;
+      logFeedback(mood, "daily-activities", 0);
+      setFeedbackGiven(true);
+    }}>
+      No
+    </button>
+  </div>
+)}
+
     </div>
   );
 }

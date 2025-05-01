@@ -1,0 +1,95 @@
+// src/components/ActionEffectivenessPie.tsx
+
+import React, { useEffect, useState } from "react";
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+
+// Mood types used in RL logic
+export type Mood = 'happy' | 'neutral' | 'sad' | 'anxious' | 'angry' | 'burnt_out';
+
+export const isMood = (m: string): m is Mood =>
+  ["happy", "neutral", "sad", "anxious", "angry", "burnt_out"].includes(m);
+
+type PieData = { name: string; value: number };
+
+const COLORS = ["#34d399", "#60a5fa", "#fbbf24", "#f87171", "#a78bfa", "#fb7185"];
+
+export default function ActionEffectivenessPie() {
+  const [data, setData] = useState<PieData[]>([]);
+  const [targetMood, setTargetMood] = useState<Mood>("anxious");
+
+  useEffect(() => {
+    const stored = localStorage.getItem("feedback_log");
+    if (!stored) return;
+
+    try {
+      const logs: { mood: string; action: string; reward: number }[] = JSON.parse(stored);
+      const filtered = logs.filter((log) => isMood(log.mood) && log.mood === targetMood);
+
+      const grouped: Record<string, { total: number; count: number }> = {};
+      filtered.forEach(({ action, reward }) => {
+        if (!grouped[action]) grouped[action] = { total: 0, count: 0 };
+        grouped[action].total += reward;
+        grouped[action].count += 1;
+      });
+
+      const formatted: PieData[] = Object.entries(grouped).map(([name, { total, count }]) => ({
+        name,
+        value: count === 0 ? 0 : Math.round((total / count) * 100),
+      }));
+
+      setData(formatted);
+    } catch (err) {
+      console.error("Error parsing feedback_log:", err);
+    }
+  }, [targetMood]);
+
+  return (
+    <div className="text-white mt-10 p-4 rounded-lg bg-[#1e293b] shadow-xl max-w-md mx-auto">
+      <h2 className="text-xl font-semibold mb-2 text-center">🎯 Action Effectiveness</h2>
+
+      <div className="text-center mb-4">
+        <label className="mr-2 text-sm text-gray-300">Select mood:</label>
+        <select
+          value={targetMood}
+          onChange={(e) => setTargetMood(e.target.value as Mood)}
+          className="text-black px-2 py-1 rounded"
+        >
+          <option value="happy">Happy</option>
+          <option value="neutral">Neutral</option>
+          <option value="sad">Sad</option>
+          <option value="anxious">Anxious</option>
+          <option value="angry">Angry</option>
+          <option value="burnt_out">Burnt Out</option>
+        </select>
+      </div>
+
+      {data.length > 0 ? (
+        <ResponsiveContainer width="100%" height={280}>
+          <PieChart>
+            <Pie
+              data={data}
+              dataKey="value"
+              nameKey="name"
+              cx="50%"
+              cy="50%"
+              outerRadius={100}
+              label={({ name, value }) => `${name}: ${value}%`}
+              isAnimationActive={true}
+              animationDuration={800}
+            >
+              {data.map((_, index) => (
+                <Cell key={index} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+            <Tooltip />
+            <Legend />
+          </PieChart>
+        </ResponsiveContainer>
+      ) : (
+        <p className="text-center text-sm text-gray-400">
+          No feedback data available for <strong>{targetMood}</strong>
+        </p>
+      )}
+    </div>
+  );
+}

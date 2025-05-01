@@ -1,0 +1,19 @@
+[33m6242c95[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mv3[m[33m, [m[1;31morigin/v3[m[33m)[m HEAD@{0}: checkout: moving from v3 to v3
+[33m6242c95[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mv3[m[33m, [m[1;31morigin/v3[m[33m)[m HEAD@{1}: checkout: moving from merged to v3
+[33m18cdb3a[m[33m ([m[1;32mmerged[m[33m)[m HEAD@{2}: commit: WIP: changes before switching to v3
+[33mfe08152[m[33m ([m[1;31morigin/merged[m[33m)[m HEAD@{3}: checkout: moving from v3 to merged
+[33m6242c95[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mv3[m[33m, [m[1;31morigin/v3[m[33m)[m HEAD@{4}: reset: moving to HEAD
+[33m6242c95[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mv3[m[33m, [m[1;31morigin/v3[m[33m)[m HEAD@{5}: pull --rebase origin v3 (finish): returning to refs/heads/v3
+[33m6242c95[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mv3[m[33m, [m[1;31morigin/v3[m[33m)[m HEAD@{6}: pull --rebase origin v3 (pick): My latest frontend changes before syncing (with server mods)
+[33m2d2f8de[m HEAD@{7}: pull --rebase origin v3 (pick): updated files
+[33me9d3d92[m HEAD@{8}: pull --rebase origin v3 (pick): updated files
+[33md0a6c92[m HEAD@{9}: pull --rebase origin v3 (start): checkout d0a6c929794b41454f0e6cc9493d7c0cb1086f39
+[33mb1afc59[m HEAD@{10}: commit: My latest frontend changes before syncing (with server mods)
+[33m2daf55b[m HEAD@{11}: commit: updated files
+[33m3a866a9[m HEAD@{12}: commit: updated files
+[33m4fa51dd[m[33m ([m[1;33mtag: [m[1;33mV3.0.0[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{13}: checkout: moving from master to v3
+[33m4fa51dd[m[33m ([m[1;33mtag: [m[1;33mV3.0.0[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{14}: commit: v2 updates
+[33me921e5c[m HEAD@{15}: commit: V2 updated
+[33ma8ddb4b[m HEAD@{16}: commit: version 2 done
+[33mb796ae4[m HEAD@{17}: commit: Installed nodemon and updated package.json
+[33mcc355b7[m HEAD@{18}: commit (initial): initial commit

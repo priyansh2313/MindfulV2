@@ -1,10 +1,18 @@
 import { ArrowLeft, Book, Calendar, Save } from "lucide-react";
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import styles from "../styles/Journal.module.css"; // Import CSS Module
-import axios from "../hooks/axios/axios";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import FeedbackComponent, { isMood } from "../components/FeedbackComponent"; // ✅ Feedback import
+import axios from "../hooks/axios/axios";
 import Loader from "../hooks/Loader/Loader";
+import styles from "../styles/Journal.module.css";
+
+// Define the JournalEntry type
+interface JournalEntry {
+	title: string;
+	content: string;
+	mood: string;
+}
 
 const Journal = () => {
 	const navigate = useNavigate();
@@ -17,6 +25,7 @@ const Journal = () => {
 		mood: "neutral",
 	});
 	const [isWriting, setIsWriting] = useState(false);
+	const [cameFromRL, setCameFromRL] = useState(false);
 
 	useEffect(() => {
 		setLoading(true);
@@ -29,10 +38,21 @@ const Journal = () => {
 				console.error("Error fetching journal entries:", error);
 				toast.error("Failed to load journal entries. Please try again.");
 			})
-			.finally(() => {
+			.then(() => {
+				setLoading(false);
+			})
+			.catch(() => {
 				setLoading(false);
 			});
 	}, []);
+
+	useEffect(() => {
+		const source = localStorage.getItem("rl_action_source");
+		if (source === "journal") setCameFromRL(true);
+	}, []);
+
+	const storedMood = localStorage.getItem("todayMood");
+const currentMood = storedMood !== null && isMood(storedMood) ? storedMood : null;
 
 	const handleSave = () => {
 		if (!currentEntry.title.trim() || !currentEntry.content.trim()) return;
@@ -55,12 +75,20 @@ const Journal = () => {
 			});
 	};
 
+	
+
+
 	return (
 		<div className={styles.journalContainer}>
 			{/* Back Button */}
 			<button className={styles.backButton} onClick={() => navigate("/dashboard")}>
 				<ArrowLeft className={styles.backIcon} /> Back to Dashboard
 			</button>
+
+			{/* Feedback UI */}
+			{cameFromRL && currentMood && isMood(currentMood) && (
+				<FeedbackComponent mood={currentMood} action="journal" />
+			)}
 
 			{/* Journal UI */}
 			<div className={styles.journalBook}>
@@ -94,46 +122,46 @@ const Journal = () => {
 										</div>
 									))
 								)}
-							</div>
-						</>
-					) : (
-						<div className={styles.entryForm}>
-							<input
-								type="text"
-								placeholder="Entry Title"
-								value={currentEntry.title}
-								onChange={(e) => setCurrentEntry({ ...currentEntry, title: e.target.value })}
-								className={styles.entryTitleInput}
-							/>
-
-							<select
-								value={currentEntry.mood}
-								onChange={(e) => setCurrentEntry({ ...currentEntry, mood: e.target.value })}
-								className={styles.moodSelector}>
-								<option value="happy">😊 Happy</option>
-								<option value="calm">😌 Calm</option>
-								<option value="neutral">😐 Neutral</option>
-								<option value="anxious">😰 Anxious</option>
-								<option value="sad">😢 Sad</option>
-							</select>
-
-							<textarea
-								placeholder="Write your thoughts here..."
-								value={currentEntry.content}
-								onChange={(e) => setCurrentEntry({ ...currentEntry, content: e.target.value })}
-								className={styles.entryTextarea}
-							/>
-
-							<div className={styles.buttonGroup}>
-								<button onClick={() => setIsWriting(false)} className={styles.cancelButton}>
-									Cancel
-								</button>
-								<button onClick={handleSave} className={styles.saveButton}>
-									<Save className={styles.icon} /> Save Entry
-								</button>
-							</div>
 						</div>
-					)}
+					</>
+				) : (
+					<div className={styles.entryForm}>
+						<input
+							type="text"
+							placeholder="Entry Title"
+							value={currentEntry.title}
+							onChange={(e) => setCurrentEntry({ ...currentEntry, title: e.target.value })}
+							className={styles.entryTitleInput}
+						/>
+
+						<select
+							value={currentEntry.mood}
+							onChange={(e) => setCurrentEntry({ ...currentEntry, mood: e.target.value })}
+							className={styles.moodSelector}>
+							<option value="happy">😊 Happy</option>
+							<option value="calm">😌 Calm</option>
+							<option value="neutral">😐 Neutral</option>
+							<option value="anxious">😰 Anxious</option>
+							<option value="sad">😢 Sad</option>
+						</select>
+
+						<textarea
+							placeholder="Write your thoughts here..."
+							value={currentEntry.content}
+							onChange={(e) => setCurrentEntry({ ...currentEntry, content: e.target.value })}
+							className={styles.entryTextarea}
+						/>
+
+						<div className={styles.buttonGroup}>
+							<button onClick={() => setIsWriting(false)} className={styles.cancelButton}>
+								Cancel
+							</button>
+							<button onClick={handleSave} className={styles.saveButton}>
+								<Save className={styles.icon} /> Save Entry
+							</button>
+						</div>
+					</div>
+				)}
 				</div>
 			</div>
 		</div>

@@ -18,11 +18,13 @@ import {
 import React, { useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
+import ActionEffectivenessPie from "../components/ActionEffectivenessPie";
 import EvaluationGraph from "../pages/EvaluationGraph";
 import FloatingChatbot from "../pages/FloatingChatbot";
 import FloatingLeaves from "../pages/FloatingLeaves";
 import styles from "../styles/Dashboard.module.css";
 import { chooseAction, initQTable } from "../utils/reinforcement";
+
 
 const qTable = initQTable();
 const mood = localStorage.getItem("todayMood") as any;
@@ -37,6 +39,7 @@ const tips = [
   "Drink a full glass of water to reset.",
   "Check in with a friend today.",
 ];
+
 
 
 
@@ -94,6 +97,17 @@ const Dashboard = () => {
     }, 20);
   }, []);
 
+  const [showPrompt, setShowPrompt] = useState(false);
+
+  useEffect(() => {
+    const source = localStorage.getItem("rl_action_source");
+    if (source === "music") {
+      setShowPrompt(true);
+      localStorage.removeItem("rl_action_source"); // clear it after use
+    }
+  }, []);
+  
+
 
   
 
@@ -121,8 +135,13 @@ const Dashboard = () => {
     if (path) {
       navigate(path);
     }
+    localStorage.setItem("rl_action_source", content);
+navigate(path);
+
   };
+
   
+
 
   const refreshTip = () => {
     let newTip = tip;
@@ -201,7 +220,7 @@ const Dashboard = () => {
 
 <div className={styles.dashboardWidgets}>
           <div className={styles.widgetCard}>
-            <div className={styles.widgetHeader}><Smile /> Mood Tracker</div>
+            <div className={styles.widgetHeader}><Smile /> Select your current mood </div>
             <div className={styles.moodOptions}>
               {["😄", "🙂", "😐", "😕", "😢"].map((emoji) => (
                 <button
@@ -220,6 +239,12 @@ const Dashboard = () => {
               </p>
             )}
           </div>
+
+          <div className={styles.widgetCard}>
+  
+  <p className={styles.widgetNote}>Which activities helped most when anxious</p>
+  <ActionEffectivenessPie />
+</div>
 
           <div className={styles.widgetCard}>
             <div className={styles.widgetHeader}><TrendingUp /> Daily Progress</div>
@@ -247,11 +272,13 @@ const Dashboard = () => {
       </div>
 
       <FloatingChatbot
-        isOpen={showChat}
-        onToggle={() => setShowChat((prev) => !prev)}
-        hoveredSection={hoveredSection}
-        source="dashboard"
-      />
+  isOpen={showChat}
+  onToggle={() => setShowChat((prev) => !prev)}
+  hoveredSection={hoveredSection}
+  mode="dashboard"
+  
+/>
+
     </div>
   );
 };

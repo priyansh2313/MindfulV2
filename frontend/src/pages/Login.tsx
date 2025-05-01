@@ -7,6 +7,7 @@ import axios from "../hooks/axios/axios";
 import { setUser } from "../redux/slices/userSlice";
 import { toast } from "react-hot-toast";
 import { Brain } from "lucide-react";
+import styles from "../styles/Login.module.css"
 
 const Login = () => {
 	const dispatch = useDispatch();

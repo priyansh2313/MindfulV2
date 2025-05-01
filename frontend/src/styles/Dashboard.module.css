@@ -215,20 +215,30 @@ body, html {
 }
 
 .widgetCard {
-  background: #2e2f4f;
-  border-radius: 1.2rem;
-  padding: 1.5rem;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
-  color: #f0f0f0;
+  background: linear-gradient(145deg, #2f314f, #24263b);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  color: #f9fafb;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(6px);
+}
+
+.widgetCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
 }
 
 .widgetHeader {
-  font-weight: 600;
-  font-size: 1rem;
-  margin-bottom: 1rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 1.25rem;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.75rem;
+  color: #e0e7ff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.5rem;
 }
 
 .moodOptions {

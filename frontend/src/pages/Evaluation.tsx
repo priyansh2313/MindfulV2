@@ -2,8 +2,12 @@ import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import FeedbackComponent, { isMood } from "../components/FeedbackComponent";
 import FloatingChatbot from "../pages/FloatingChatbot";
 import styles from "../styles/Evaluation.module.css";
+import { logFeedback, Mood } from "../utils/reinforcement";
+
+
 
 
 const categories = {
@@ -26,6 +30,11 @@ const Evaluation = () => {
   const [answers, setAnswers] = useState<number[]>([]);
   const [showResults, setShowResults] = useState(false);
   const [chatbotOpen, setChatbotOpen] = useState(false);
+  const [cameFromRL, setCameFromRL] = useState(false);
+  const [feedbackGiven, setFeedbackGiven] = useState(false); // ✅ Move here
+
+
+  
 
   const questions = Object.entries(categories).flatMap(([key, qs]) =>
     qs.map((q) => ({ category: key, question: q }))
@@ -63,6 +72,16 @@ const Evaluation = () => {
     if (percentage <= 75) return "High";
     return "Severe";
   };
+
+  useEffect(() => {
+    const source = localStorage.getItem("rl_action_source");
+    if (source === "evaluation") setCameFromRL(true);
+  }, []);
+
+  const currentMood = (localStorage.getItem("todayMood") || "😐") as string;
+
+
+
 
   useEffect(() => {
     if (showResults) {
@@ -190,6 +209,9 @@ const Evaluation = () => {
             >
               <ArrowLeft className="inline h-5 w-5 mr-2" /> Back to Dashboard
             </motion.button>
+            {cameFromRL && isMood(currentMood) && (
+              <FeedbackComponent mood={currentMood} action="evaluation" />
+)}
 
             <motion.h2 className={styles.evaluationTitle}>
               Mental Health Evaluation
@@ -211,7 +233,39 @@ const Evaluation = () => {
           </>
         )}
       </motion.div>
+      {!feedbackGiven && (
+  <div className="mt-6 p-4 bg-white rounded-xl shadow-lg max-w-md mx-auto text-center">
+    <p className="text-gray-800 font-semibold mb-3">
+      🧘 Was this helpful?
+    </p>
+    <div className="flex justify-center gap-4">
+      <button
+        onClick={() => {
+          const mood = (localStorage.getItem("todayMood") || "unknown") as Mood;
+          logFeedback(mood, "evaluation", 1);
+          setFeedbackGiven(true);
+        }}
+        className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
+      >
+        Yes
+      </button>
+      <button
+        onClick={() => {
+          const mood = (localStorage.getItem("todayMood") || "unknown") as Mood;
+          logFeedback(mood, "evaluation", 0);
+          setFeedbackGiven(true);
+        }}
+        className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+      >
+        No
+      </button>
     </div>
+  </div>
+)}
+
+      
+    </div>
+    
   );
 };
 

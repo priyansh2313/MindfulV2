@@ -9,7 +9,8 @@ import FeedbackComponent, { isMood } from "../components/FeedbackComponent";
 import FloatingChatbot from "../pages/FloatingChatbot";
 import styles from "../styles/Evaluation.module.css";
 import { logFeedback } from "../utils/reinforcement";
-import BG from "../assets/images/evlationBg.png"
+import axios from "../hooks/axios/axios"
+ import toast from "react-hot-toast"
 
 
 // Fix TypeScript error for SpeechRecognition
@@ -169,8 +170,10 @@ const Evaluation = () => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      localStorage.setItem("evaluationScore", updatedAnswers.reduce((a, b) => a + b, 0).toString());
-      setShowResults(true);
+      const score = updatedAnswers.reduce((a, b) => a + b, 0);
+ 			handleUpload(score);
+ 			localStorage.setItem("evaluationScore", score.toString());
+ 			setShowResults(true);
     }
   };
 
@@ -232,6 +235,26 @@ const Evaluation = () => {
   };
 
   const currentMood = localStorage.getItem("todayMood") || "😐";
+
+  const handleUpload = (score: number) => {
+ 		const scores: { [key: string]: number } = {};
+ 		let index = 0;
+ 
+ 		for (const key in categories) {
+ 			const qCount = categories[key].length;
+ 			scores[key] = answers.slice(index, index + qCount).reduce((a, b) => a + b, 0);
+ 			index += qCount;
+ 		}
+ 
+ 		axios
+ 			.post("/test", { ...scores, score }, { withCredentials: true })
+ 			.then(({ data }) => {
+ 				toast.success("Test Results Updated");
+ 			})
+ 			.catch((error) => {
+ 				console.error("Error uploading data:", error);
+ 			});
+ 	};
 
   return (
     <div className={styles.evaluationContainer}>

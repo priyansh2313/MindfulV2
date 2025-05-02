@@ -9,6 +9,7 @@ import FeedbackComponent, { isMood } from "../components/FeedbackComponent";
 import FloatingChatbot from "../pages/FloatingChatbot";
 import styles from "../styles/Evaluation.module.css";
 import { logFeedback } from "../utils/reinforcement";
+import BG from "../assets/images/evlationBg.png"
 
 
 // Fix TypeScript error for SpeechRecognition

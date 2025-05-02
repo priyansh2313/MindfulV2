@@ -248,30 +248,23 @@ const Dashboard = () => {
 				</div>
 			</div>
 
-			{showSection && (
-				<motion.div
-					className={styles.scrollRevealSection}
-					initial={{ opacity: 0, y: 50 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 1 }}>
-					<div className={styles.scrollPanel}>
-						<img
-							src="https://source.unsplash.com/featured/?happy,person"
-							alt="Mental Health Support"
-							className={styles.scrollImage}
-						/>
-						<div className={styles.scrollContent}>
-							<h2 className={styles.scrollTitle}>
-								Mental Health, <span className={styles.highlight}>Redefined</span>
-							</h2>
-							<p className={styles.scrollDescription}>
-								Your mental health matters. Access support anytime, anywhere.
-							</p>
-							<button className={styles.ctaButton}>Learn More</button>
-						</div>
-					</div>
-				</motion.div>
-			)}
+      {showSection && (
+        <motion.div
+          className={styles.scrollRevealSection}
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          <div className={styles.scrollPanel}>
+            <img src="./images/logo.png" alt="Mental Health Support" className={styles.scrollImage} />
+            <div className={styles.scrollContent}>
+              <h2 className={styles.scrollTitle}>Mental Health, <span className={styles.highlight}>Redefined</span></h2>
+              <p className={styles.scrollDescription}>Your mental health matters. Access support anytime, anywhere.</p>
+              <button className={styles.ctaButton}>Learn More</button>
+            </div>
+          </div>
+        </motion.div>
+      )}
 
 			<div className={styles.analyticsSection}>
 				<h2 className={styles.analyticsHeading}>Your Analytics</h2>

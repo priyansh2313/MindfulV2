@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/Music.module.css';
-import { logFeedback, updateExplorationRate } from "../utils/reinforcement";
+//import { logFeedback, updateExplorationRate } from "../utils/reinforcement";
 import MusicPlayer from './MusicPlayer';
 
 const playlists = [

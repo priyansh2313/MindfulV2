@@ -1,14 +1,11 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Brain } from "lucide-react";
 import React, { useState } from "react";
+import { toast } from "react-hot-toast";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../firebase"; // Import Firebase auth
-import styles from "../styles/Signup.module.css";
-import { header } from "framer-motion/client";
 import axios from "../hooks/axios/axios";
 import { setUser } from "../redux/slices/userSlice";
-import { useDispatch } from "react-redux";
-import {toast} from "react-hot-toast"
+import styles from "../styles/Signup.module.css";
 
 const Signup = () => {
 	const dispatch = useDispatch(); 
@@ -41,7 +38,7 @@ const Signup = () => {
 				console.log(data);
 				toast.success("Account created successfully!")
 				dispatch(setUser(data.data)); 
-				navigate("/dashboard");
+				navigate("/case-history");
 			})
 			.catch((error: any) => {
 				setError("Signup failed!");

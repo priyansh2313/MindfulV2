@@ -28,7 +28,7 @@ const Login = () => {
 				console.log(data);
 				dispatch(setUser(data.data));
 				toast.success("Login successful!");
-				navigate("/dashboard");
+				navigate("/case-history");
 			})
 			.catch((error: any) => {
         setError("Login failed!");

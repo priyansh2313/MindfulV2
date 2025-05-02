@@ -31,7 +31,7 @@ const CaseHistory = () => {
   const handleSubmit = () => {
     console.log("Submitted Case History:", responses);
     alert("Thank you for providing your case history!");
-    navigate("/Login");
+    navigate("/dashboard");
   };
 
   return (

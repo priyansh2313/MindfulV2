@@ -200,7 +200,7 @@ navigate(path);
           transition={{ duration: 1 }}
         >
           <div className={styles.scrollPanel}>
-            <img src="https://source.unsplash.com/featured/?happy,person" alt="Mental Health Support" className={styles.scrollImage} />
+            <img src="./images/logo.png" alt="Mental Health Support" className={styles.scrollImage} />
             <div className={styles.scrollContent}>
               <h2 className={styles.scrollTitle}>Mental Health, <span className={styles.highlight}>Redefined</span></h2>
               <p className={styles.scrollDescription}>Your mental health matters. Access support anytime, anywhere.</p>

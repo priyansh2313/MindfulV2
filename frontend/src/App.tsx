@@ -21,6 +21,7 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import './styles/style.css'
+import GratitudeJournal from "./pages/GratitudeJournal"
 
 function App() {
   const user = useSelector((state: any) => state.user); 
@@ -44,6 +45,7 @@ function App() {
         <Route path="/case-history" element={<CaseHistory />} />
         <Route path="/SleepCycleSection" element={<SleepCycleSection />} />
         <Route path="/profile" element={<Profile />} />
+        {/* <Route path="/gratitudeJournal" element={<GratitudeJournal />} /> */}
       </Routes>
     </Router>
   );

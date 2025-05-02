@@ -56,6 +56,7 @@ const Login = () => {
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						className={styles.input}
+						placeholder="email"
 						required
 					/>
 
@@ -63,20 +64,21 @@ const Login = () => {
 					<input
 						type="password"
 						value={password}
+						placeholder="password"
 						onChange={(e) => setPassword(e.target.value)}
 						className={styles.input}
 						required
 					/>
 
 					<button type="submit" className={styles.button3d}>
-						Sign In
+						{loading? "Logging in..." : "Login"}
 					</button>
 				</form>
 
 				<p className={styles.signupText}>
 					Don't have an account?{" "}
 					<Link to="/signup" className={styles.signupLink}>
-						{loading ? "Logging in" : "Sign up"}
+						Sign up
 					</Link>
 				</p>
 			</div>

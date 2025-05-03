@@ -1,3 +1,5 @@
+// src/components/FloatingChatbot.tsx
+
 import { X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import styles from "../styles/FloatingChatbot.module.css";
@@ -13,19 +15,23 @@ type FloatingChatbotProps = {
 };
 
 const tips = [
-  "Remember to breathe deeply \ud83c\udf2c\ufe0f",
-  "You are enough, just as you are \ud83d\udc96",
-  "Take a 5-second pause and smile \ud83d\ude42",
-  "Let go of tension in your shoulders \ud83e\uddd8\u200d\u2640\ufe0f",
-  "You're doing better than you think \ud83d\udcaa",
+  "Remember to breathe deeply 🌬️",
+  "You are enough, just as you are 💖",
+  "Take a 5-second pause and smile 🙂",
+  "Let go of tension in your shoulders 🧘‍♀️",
+  "You're doing better than you think 💪",
 ];
 
-export default function FloatingChatbot({ isOpen, onToggle, hoveredSection, mode, chatbotMessages }: FloatingChatbotProps) {
+export default function FloatingChatbot({
+  isOpen,
+  onToggle,
+  hoveredSection,
+  mode,
+  chatbotMessages,
+}: FloatingChatbotProps) {
   const [showTip, setShowTip] = useState(false);
   const [currentTip, setCurrentTip] = useState(tips[0]);
   const [shapeClass, setShapeClass] = useState("shapeCircle");
-  const [ setHoveredSection] = useState("encyclopedia");
-
 
   useEffect(() => {
     const shapes = ["shapeCircle", "shapePill", "shapeSquircle", "shapeDiamond"];
@@ -48,10 +54,6 @@ export default function FloatingChatbot({ isOpen, onToggle, hoveredSection, mode
     }
   }, [mode]);
 
-
-
-  
-
   return (
     <div className={styles.chatbotWrapper}>
       {/* Chat window */}
@@ -65,21 +67,21 @@ export default function FloatingChatbot({ isOpen, onToggle, hoveredSection, mode
           <div className={styles.chatHeader}>
             <h3>
               {mode === "evaluation"
-                ? "\ud83d\udea8 Urgent Support":
-                mode === "dashboard"
-                ? "\ud83d\udc4c Mindful Bot"
+                ? "🚨 Urgent Support"
+                : mode === "dashboard"
+                ? "👌 Mindful Bot"
                 : mode === "exercise"
-                ? "\ud83e\uddd8\u200d\u2640\ufe0f Mindfulness Guide"
+                ? "🧘‍♀️ Mindfulness Guide"
                 : mode === "assistant"
-                ? "\ud83e\udd16 Mindful Assistant Guide"
-                : "\ud83d\udcac Mindful Bot"}
+                ? "🤖 Mindful Assistant Guide"
+                : "💬 Mindful Bot"}
             </h3>
             <button onClick={onToggle} className={styles.closeBtn}>
               <X size={20} />
             </button>
           </div>
 
-          {/* \ud83d\udc47 If assistant mode, show guiding messages */}
+          {/* Assistant mode with predefined messages */}
           {mode === "assistant" && chatbotMessages && chatbotMessages.length > 0 ? (
             <div className={styles.chatContent}>
               {chatbotMessages.map((msg, idx) => (
@@ -89,14 +91,16 @@ export default function FloatingChatbot({ isOpen, onToggle, hoveredSection, mode
               ))}
             </div>
           ) : (
-            <MindfulChat mode={mode} setInstructorMode={() => {}} />
+            <MindfulChat mode={mode} />
           )}
         </div>
       )}
 
-      {/* \ud83e\udde0 Assistant Floating Orb */}
+      {/* Floating orb */}
       <div
-        className={`${styles.avatarAssistant} ${styles[shapeClass]} ${hoveredSection && mode === "dashboard" ? styles.pulse : ''}`}
+        className={`${styles.avatarAssistant} ${styles[shapeClass]} ${
+          hoveredSection && mode === "dashboard" ? styles.pulse : ""
+        }`}
         onClick={onToggle}
         title={
           mode === "dashboard"
@@ -107,16 +111,16 @@ export default function FloatingChatbot({ isOpen, onToggle, hoveredSection, mode
             ? "Ask for guidance"
             : "Emergency support"
         }
-      >🧠
+      >
+        🧠
         {hoveredSection && mode === "dashboard" ? (
           <div className={styles.tipBubble}>
             {`Thinking about ${hoveredSection.toLowerCase()}?`}
           </div>
         ) : (
-          showTip && mode === "dashboard" && (
-            <div className={styles.tipBubble}>
-              {currentTip}
-            </div>
+          showTip &&
+          mode === "dashboard" && (
+            <div className={styles.tipBubble}>{currentTip}</div>
           )
         )}
       </div>

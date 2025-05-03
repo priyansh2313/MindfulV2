@@ -136,6 +136,21 @@ const Encyclopedia = () => {
           <Search className={styles.searchIcon} />
         </motion.div>
 
+        <div
+					style={{
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						marginBottom: "20px",
+						fontSize: "30px",
+						color: "red",
+					}}>
+					<marquee>
+						⚠️ Disclaimer Mindful AI is a supportive tool,<strong> not a diagnosis or treatment</strong>. For severe mental health
+						issues, consult a professional.
+					</marquee>
+				</div>
+
         {/* Disorder Cards */}
         <div className={styles.cardContainer}>
           {filteredDisorders.length > 0 ? (

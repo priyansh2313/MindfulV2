@@ -1,14 +1,13 @@
 
 
 import React, { useState } from "react";
-import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../hooks/axios/axios";
 import { setUser } from "../redux/slices/userSlice";
-import styles from "../styles/Login.module.css";
-
-
+import { toast } from "react-hot-toast";
+import { Brain } from "lucide-react";
+import styles from "../styles/Login.module.css"
 
 const Login = () => {
 	const dispatch = useDispatch();
@@ -25,10 +24,11 @@ const Login = () => {
 		axios
 			.post("/users/login", { email, password }, {withCredentials: true})
 			.then(({ data }) => {
-				console.log(data);
+				console.log(data.data);
+				localStorage.setItem("user", JSON.stringify(data.data));
 				dispatch(setUser(data.data));
 				toast.success("Login successful!");
-				navigate("/dashboard");
+				navigate("/case-history");
 			})
 			.catch((error: any) => {
         setError("Login failed!");
@@ -56,6 +56,7 @@ const Login = () => {
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						className={styles.input}
+						placeholder="email"
 						required
 					/>
 
@@ -63,20 +64,21 @@ const Login = () => {
 					<input
 						type="password"
 						value={password}
+						placeholder="password"
 						onChange={(e) => setPassword(e.target.value)}
 						className={styles.input}
 						required
 					/>
 
 					<button type="submit" className={styles.button3d}>
-						Sign In
+						{loading? "Logging in..." : "Login"}
 					</button>
 				</form>
 
 				<p className={styles.signupText}>
 					Don't have an account?{" "}
 					<Link to="/signup" className={styles.signupLink}>
-						{loading ? "Logging in" : "Sign up"}
+						Sign up
 					</Link>
 				</p>
 			</div>

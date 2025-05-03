@@ -1,0 +1,14 @@
+:root{
+    height: 100dvh;
+    width: 100dvw;
+    /* overflow: hidden; */
+    position: absolute;
+    top: 0;
+    z-index: 999;
+    margin: 0;
+}
+
+::-webkit-scrollbar {
+    display: none;
+    /* Hide scrollbar for Webkit browsers */
+}
